@@ -1,0 +1,41 @@
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+
+    <script>
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+var firebaseConfig = {
+    apiKey: "AIzaSyAnQvFXa9WYnkyRg3cGFGeThx2Jxw10S8Q",
+    authDomain: "voyager-295514.firebaseapp.com",
+    projectId: "voyager-295514",
+    storageBucket: "voyager-295514.appspot.com",
+    messagingSenderId: "73940579182",
+    appId: "1:73940579182:web:b435314010b2674bac077f",
+    measurementId: "G-NMHLDBNYMP"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+</script>
+
+
+FCM key here :
+AAAAETczs24:APA91bFMCSLWHK1Oiy4sM3Z4Oq8-RAWeD522j3lORJqmbeSDzBxDx5IOGqnObkhHLSb12M_YUFCcrAVygjqNYDnN65MrrWWkVSqXffzF0MrnP5ZIqjiWVH-bjBIM4b2yfcw2alKLvvtx
+
+
+sender id :
+73940579182
+
+
+Token Here :
+fbzonK1TvA8:APA91bFoNXVunTwsfu_G-O73Cs4OE8McUIEZotNaeyj2ZPP1TJOBHJcPETryMBNxMLB7xKfVt5Ec92_a-yTga4b0JTNrIeD21O7akBHTn_IzP1Y7qx1kblDgsklQWhCUqlOevl2UXnRf
+
+
+
+
+
+
