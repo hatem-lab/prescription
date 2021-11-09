@@ -56,6 +56,7 @@
 
                                                 <h4 class="form-section"><i class="ft-home"></i>  {{Lang::get('all.courses data',[],getCurrentLang())}} </h4>
                                                 <div class="row">
+                                                
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="projectinput1"> {{Lang::get('all.type',[],getCurrentLang())}}
