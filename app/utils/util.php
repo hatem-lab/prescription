@@ -12,6 +12,17 @@ function getCurrentLang()
 {
     return app()->getLocale();
 }
+function getActive($status){
+
+    /* return $status == 1 ? 'مفعل' : 'غير مفعل'; */
+    return $status == 1 ? 'Published' :' Un-published';
+ }
+
+function getFolder()
+{
+
+    return app()->getLocale() == 'ar' ? 'css-rtl' : 'css';
+}
 
 function returnError($msg, $ex = '' , $errNum = \App\enums\ErrorCode::error )
 {
@@ -62,7 +73,13 @@ function uploadImage($image , $fileName)
     return $imageToSave;
 }
 
+function uploadImage1($folder,$image){
+    $image->store('/', $folder);
+    $filename = $image->hashName();
+    return  $filename;
+ }
+
 function getImage($image)
 {
-    return URL::to('/') . '/storage/' . $image;
+    return URL::to('/') . 'assets/images/courses/' . $image;
 }

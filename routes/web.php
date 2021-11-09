@@ -31,7 +31,7 @@ Route::get('pages' , function (){
     return view('pages');
 });
 
-Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 

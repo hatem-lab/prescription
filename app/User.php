@@ -27,10 +27,7 @@ class User extends Authenticatable implements JWTSubject
     /*
        * @var array
        */
-    protected $fillable = [
-        'fname' , 'lname' , 'phone' , 'num_del_ob ',
-        'status' , 'password' , 'mobile_confirmed'
-    ];
+   protected $guarded=[];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -72,8 +69,6 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function orders() {
-        return $this->hasMany(Order::class , 'user_id');
-    }
+
 
 }
