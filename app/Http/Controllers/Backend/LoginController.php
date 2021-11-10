@@ -13,38 +13,27 @@ class LoginController extends Controller
         return view('dashboard.auth.login');
     }
 
-
-
     public function login(LoginRequest $request){
-
         $remember_me = $request->has('remember_me') ? true : false;
-
         if (auth()->guard('admin')->attempt(['email' => $request->input("email"), 'password' => $request->input("password")], $remember_me)) {
-           // notify()->success('تم الدخول بنجاح  ');
             $user=auth()->guard('admin')->user()->user_type;
             if($user ==="admin")
             {
                 return redirect() -> route('admin.dashboard');
             }else
             {
-                return redirect()->back()->with(['error' => 'هذا الحساب ليس للادمن']);
+                return redirect()->back()->with(['error' => 'هذا الحساب  للادمن']);
             }
            
         }
-       // notify()->error('خطا في البيانات  برجاء المجاولة مجدا ');
         return redirect()->back()->with(['error' => 'هناك خطا بالبيانات']);
     }
-
-
     public function logout()
     {
-
         $gaurd = $this->getGaurd();
         $gaurd->logout();
-
         return redirect()->route('admin.login');
     }
-
     private function getGaurd()
     {
         return auth('admin');

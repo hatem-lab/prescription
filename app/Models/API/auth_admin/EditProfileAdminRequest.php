@@ -21,23 +21,63 @@ class EditProfileAdminRequest
 {
     /**
      * @OA\Property(
-     *     description="First Name",
-     *     title="first_name",
-     * )
-     *
-     * @var string
-     */
-    public $first_name;
-
-    /**
-     * @OA\Property(
      *     description="Last Name",
      *     title="last_name",
      * )
      *
      * @var string
      */
-    public $last_name;
+    public $name;
+
+    /**
+     * @OA\Property(
+     *     description="Phone",
+     *     title="phone",
+     * )
+     *
+     * @var string
+     */
+    public $phone;
+
+    /**
+     * @OA\Property(
+     *     description="email",
+     *     title="email",
+     * )
+     *
+     * @var string
+     */
+    public $email;
+
+    /**
+     * @OA\Property(
+     *     description="password",
+     *     title="password",
+     * )
+     *
+     * @var string
+     */
+    public $password;
+
+    /**
+     * @OA\Property(
+     *     description="region",
+     *     title="region",
+     * )
+     *
+     * @var string
+     */
+    public $region;
+
+    /**
+     * @OA\Property(
+     *     description="city",
+     *     title="city",
+     * )
+     *
+     * @var string
+     */
+    public $city;
 
     /**
      * @OA\Property(
@@ -51,47 +91,5 @@ class EditProfileAdminRequest
 
     public $image;
 
-    /**
-     * @OA\Property(
-     *     description="isOnline: 1 => Yes, 0 => No",
-     *     enum={"0", "1"},
-     *     title="isOnline",
-     * )
-     *
-     * @var integer
-     */
-    public $isOnline;
-
-
-    /**
-     * @OA\Property(
-     *     description="Region ID",
-     *     title="region_id",
-     * )
-     *
-     * @var integer
-     */
-    public $region_id;
-
-
-    /**
-     * @OA\Property(
-     *     description="lat",
-     *     title="lat",
-     * )
-     *
-     * @var integer
-     */
-    public $lat;
-
-    /**
-     * @OA\Property(
-     *     description="lng",
-     *     title="lng",
-     * )
-     *
-     * @var integer
-     */
-    public $lng;
 
 }

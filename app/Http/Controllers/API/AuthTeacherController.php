@@ -3,29 +3,43 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\ChangeAdminPhoneRequest;
+use App\Http\Requests\Auth\ChangePasswordRequest;
 use App\Http\Requests\Auth\ChangePhoneRequest;
-use App\Http\Requests\Auth\LocationRequest;
+use App\Http\Requests\Auth\ForgetPasswordConfirmRequest;
+use App\Http\Requests\Auth\LoginAdminRequest;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\ProfileRequest;
+use App\Http\Requests\Auth\RegisterAdminRequest;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Requests\Auth\ResendCodeAdminRequest;
 use App\Http\Requests\Auth\VerifyAccountRequest;
+use App\Http\Requests\Auth\VerifyAdminAccountRequest;
+use App\Models\Admin;
+use App\Models\API\auth\ForgetPasswordConfirm;
 use App\Models\API\auth\RegisterResult;
+use App\Models\API\auth_admin\ProfileAdminResult;
 use App\services\FillApiModelService;
+use App\services\TeacherService;
 use App\services\UserService;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Hash;
 
-
-/**
- * Class AuthController
- */
-
-class AuthController extends Controller
+class AuthTeacherController extends Controller
 {
+    /**
+     * Class AuthController
+     */
+
+
+
 
     /**
-     * @OA\Post(path="/student/register",
-     *     tags={"Auth Student"},
-     *     summary="Register as a new Student",
+     * @OA\Post(path="/teacher/register",
+     *     tags={"Auth Teacher"},
+     *     summary="Register as a new Teacher",
      *     operationId="authRegister",
      *     @OA\Parameter(
      *         name="Language",
@@ -54,7 +68,7 @@ class AuthController extends Controller
     public function register(RegisterRequest $request)
     {
 
-        list($res, $data, $msg , $ex) = UserService::apiProfileCreate($request);
+        list($res, $data, $msg , $ex) = TeacherService::apiProfileCreate($request);
 
         if($res){
             return response()->json($data);
@@ -63,10 +77,15 @@ class AuthController extends Controller
         }
     }
 
+
+
+
+
+
     /**
-     * @OA\Post(path="/student/login",
-     *     tags={"Auth Student"},
-     *     summary="Login as a Student",
+     * @OA\Post(path="/teacher/login",
+     *     tags={"Auth Teacher"},
+     *     summary="Login as a Teacher",
      *     operationId="authLogin",
      *     @OA\Parameter(
      *         name="Language",
@@ -80,33 +99,47 @@ class AuthController extends Controller
      *     @OA\RequestBody(
      *         description="Login model",
      *         required=true,
-     *         @OA\JsonContent(ref="#/components/schemas/LoginPayload")
+     *         @OA\JsonContent(ref="#/components/schemas/LoginAdminPayload")
      *     ),
      *     @OA\Response(
      *         response = 200,
      *         description = "User Profile response",
-     *         @OA\JsonContent(ref="#/components/schemas/LoginResultApi"),
+     *         @OA\JsonContent(ref="#/components/schemas/LoginAdminResultApi"),
      *     ),
      * )
-     * @param LoginRequest $request
+     * @param LoginAdminRequest $request
      * @return JsonResponse
      */
 
-    public function login(LoginRequest $request)
+    public function login(Request $request)
     {
-        list($res, $data, $msg , $ex) = UserService::login($request);
+//        if($user=Admin::where('email',$request->email)->first())
+//        {
+//            if(! Hash::check($request->password, $user->password))
+//            {
+//                $message='this password not found';
+//                $message = is_array($message) ? implode($message) : $message;
+//                return returnError($message ,'');
+//            }
+//        }
+        list($res, $data, $msg, $ex) = TeacherService::loginPhoneEmailValidation($request);
 
-        if($res){
+        if ($res) {
             return response()->json($data);
         } else {
-            return returnError($msg , $ex);
+            return returnError($msg, $ex);
         }
     }
 
 
+
+
+
+
+
     /**
-     * @OA\Get(path="/student/profile",
-     *     tags={"Auth Student"},
+     * @OA\Get(path="/teacher/profile",
+     *     tags={"Auth Teacher"},
      *     summary="Get profile details",
      *     security={{"apiAuth":{}}},
      *     @OA\Parameter(
@@ -128,22 +161,22 @@ class AuthController extends Controller
 
     public function profile()
     {
-        if(student()=="student")
+        if(teacher()=="teacher")
         {
-            $data = FillApiModelService::FillProfileResultModel(user());
+            $data = FillApiModelService::FillProfileAdminResultModel(user());
             $data = FillApiModelService::FillApiResultProfileAdminResult($data);
             return response()->json($data);
         }
         else
         {
-           return returnError('must be authenticated');
+          return  returnError('must be authenticated');
         }
 
     }
 
     /**
-     * @OA\Post(path="/student/update-profile",
-     *     tags={"Auth Student"},
+     * @OA\Post(path="/teacher/update-profile",
+     *     tags={"Auth Teacher"},
      *     summary="Edit profile content",
      *     security={{"apiAuth":{}}},
      *     @OA\Parameter(
@@ -173,18 +206,19 @@ class AuthController extends Controller
 
     public function update_profile(Request $request)
     {
-        if(student()=="student") {
-            return UserService::ProfileUpdate($request);
+        if(teacher()=="teacher")
+        {
+         return TeacherService::TeacherProfileUpdate($request);
         }
         else
-            {
-                return  returnError('must be authenticated');
-            }
+        {
+            return  returnError('must be authenticated');
+        }
     }
 
     /**
-     * @OA\Post(path="/student/logout",
-     *     tags={"Auth Student"},
+     * @OA\Post(path="/teacher/logout",
+     *     tags={"Auth Teacher"},
      *     summary="Log out from system",
      *     security={{"apiAuth":{}}},
      *     @OA\Parameter(
@@ -207,8 +241,10 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        return UserService::apiLogOut($request);
+        return TeacherService::apiLogOut($request);
     }
+
+
 
 
 

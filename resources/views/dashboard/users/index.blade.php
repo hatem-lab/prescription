@@ -74,6 +74,9 @@
                                                                  aria-label="Basic example">
                                                                 <a href="{{route('admin.users.edit',$user->id)}}"
                                                                    class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">{{Lang::get('all.update',[],getCurrentLang())}} </a>
+
+                                                                 <a href="{{route('admin.users.delete',$user -> id)}}"
+                                                                   class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">{{Lang::get('all.delete',[],getCurrentLang())}}</a>  
                                                             </div>
                                                         </td>
                                                     </tr>

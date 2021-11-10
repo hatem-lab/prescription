@@ -17,7 +17,7 @@ use Illuminate\Routing\Controller as BaseController;
  *   description="main server",
  * ),
  *   @OA\Server(
- *   url="/tabu_akder/backend/public/api",
+ *   url="/laravel/backend/public/api",
  *   description="local server",
  * ),
  *

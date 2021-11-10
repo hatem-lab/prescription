@@ -18,7 +18,7 @@ const PAGINATION_COUNT=10;
 Auth::routes();
 Route::group(['prefix' => LaravelLocalization::setLocale()], function()
     {
-Route::group(['middleware' => 'auth:admin'], function () {
+Route::group(['prefix' => 'admin','middleware' => 'auth:admin'], function () {
 
     Route::get('/dashboard', 'DashboardController@index')->name('admin.dashboard');
     Route::get('logout', 'LoginController@logout')->name('admin.logout');
@@ -41,13 +41,14 @@ Route::group(['prefix' => 'users'], function () {
     Route::post('/store', 'UsersController@store')->name('admin.users.store');
     Route::get('/edit/{id}', 'UsersController@edit')->name('admin.users.edit');
     Route::post('/update/{id}', 'UsersController@update')->name('admin.users.update');
+    Route::get('/delete/{id}', 'UsersController@destroy')->name('admin.users.delete');
+});
+Route::group(['middleware' => 'guest:admin'], function () {
+    Route::get('/login', 'LoginController@getLogin')->name('admin.getLogin');
+    Route::post('/login', 'LoginController@login')->name('admin.login');
 
 });
 
 });
-
-
-Route::get('/login', 'LoginController@getLogin')->name('admin.getLogin');
-Route::post('/login', 'LoginController@login')->name('admin.login');
 
 

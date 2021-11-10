@@ -5,6 +5,7 @@ namespace App\services;
 use App\enums\ErrorCode;
 use App\enums\LoginApiEnum;
 use App\enums\UserStatus;
+use App\Models\Admin;
 use App\Models\API\auth\LoginResult;
 use App\Models\API\auth\LoginResultApi;
 use App\Models\API\location\LocationUserResult;
@@ -19,6 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Support\Facades\Auth;
@@ -27,36 +29,30 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class UserService
 {
 
-    const Msg_RegistrationSuccess = "Please Enter the Confirmation Code you will receive via phone to confirm your account.";
+    const Msg_RegistrationSuccess = "Please Enter the Confirmation Code you will receive via email to confirm your account.";
     const Msg_RegistrationSuccessForgetPassword = "Please Enter the Confirmation Code you will receive via Email to confirm changing your password.";
     const Msg_RegistrationSuccessForgetPasswordPhone = "Please Enter the Confirmation Code you will receive via SMS to confirm changing your password.";
     const facebook_graph_base_url = 'https://graph.facebook.com/';
 
     public static function profileCreate($post)
     {
-
         $msg = [];
         $result = false;
         $model = null;
         $ex = '';
-
         try {
-            $model = new User([
-                'phone' => $post->phone,
-                'status' => UserStatus::STATUS_INACTIVE,
-                'mobile_confirmed' => 0,
+            $model = new Admin([
+                'email' => $post->email,
+                'name'=>$post->name,
+                'password' => Hash::make($post->password),
+                'user_type'=>'student',
             ]);
-
-            if (($result = $model->save())) {
-                list($result_mobile, $model_mobile) = UserService::addUserMobileEmail($model->id, $model->phone, 1);
-            }
-
+            $result = $model->save();
         } catch (\Exception $ex) {
             $ex = $ex->getMessage();
-            $msg = AdminService::Msg_Exception;
+            $msg = TeacherService::Msg_Exception;
         }
-
-        return [$result, $model, $result ? __(UserService::Msg_RegistrationSuccess) : $msg, $ex];
+        return [$result, $model, $result ? 'regestered sucussefuly' : $msg, $ex];
     }
 
     public static function apiProfileCreate($request)
@@ -69,45 +65,48 @@ class UserService
         return [$result, $data, $msg, $ex];
     }
 
-    public static function profileUpdate($post)
+    public static function profileUpdate($request)
     {
+        try {
+
+
         $model = user();
-
-        if ($model->load($post)) {
-
-            if (!is_null(UploadedFile::getInstance($model, 'imagefile'))) {
-                $model->imagefile = UploadedFile::getInstance($model, 'imagefile');
-                $model->uploadImage($model) ? "" : $model->addError('imagefile', 'sth went wrong');
+        if ($model) {
+            $model->name = (isset($request->name) && $request->name) ?
+                $request->name :
+                $model->name;
+            $model->region = (isset($request->region)) ? $request->region : $model->region;
+            $model->city = (isset($request->city)) ? $request->city : $model->city;
+            $model->phone = (isset($request->phone)) ? $request->phone : $model->phone;
+            $model->email = (isset($request->email)) ? $request->email : $model->email;
+            $model->password = (isset($request->password)) ? Hash::make($request->password) : $model->password;
+            if ($request->image) {
+                $model->photo = uploadImage($request->image, Admin::image_directory);
             }
-            return [$model->save(), $model];
-        } else {
-            return [false, $model];
-        }
-    }
+            return (!$model->save()) ?
+                returnError("Error saving Teacher") :
+                returnSuccess("Student has been updated");
 
-    public static function loginPhoneEmailValidation($request)
+        } else return returnError("Student not found");
+       }catch (\Exception $ex){
+        return returnError(TeacherService::Msg_Exception , $ex->getMessage() , $ex->getCode());
+        }
+            }
+
+    public static function login($request)
     {
         try {
             $login_model = new LoginResult();
 
 
-            $token = Auth::guard('user-api')->attempt(['phone' => $request->phone, 'password' => null]);
+            $token = Auth::guard('user-api')->attempt(['email' => $request->email, 'password' =>  $request->password,'user_type'=>'student']);
             $user = Auth::guard('user-api')->user();
 
 
             if (!$user) {
                 $login_model->resultCode = LoginApiEnum::not_found;
                 $login_model->resultText = LoginApiEnum::LabelOf($login_model->resultCode);
-            } elseif ($user->status == UserStatus::STATUS_BANNED) {
-                $login_model->resultCode = LoginApiEnum::banned;
-                $login_model->resultText = LoginApiEnum::LabelOf($login_model->resultCode);
-            } elseif (!$user->mobile_confirmed) {
-                $login_model->resultCode = LoginApiEnum::not_confirmed;
-                $login_model->resultText = LoginApiEnum::LabelOf($login_model->resultCode);
-            } elseif ($user->status == UserStatus::STATUS_INACTIVE) {
-                $login_model->resultCode = LoginApiEnum::not_active;
-                $login_model->resultText = LoginApiEnum::LabelOf($login_model->resultCode);
-            } else {
+            }  else {
                 $login_model->resultCode = LoginApiEnum::accepted;
                 $login_model->resultText = LoginApiEnum::LabelOf($login_model->resultCode);
                 $login_model->token = $token;
@@ -127,7 +126,7 @@ class UserService
             return [true, $result, '', ''];
 
         } catch (\Exception $ex) {
-            return [false, null, AdminService::Msg_Exception, $ex->getMessage()];
+            return [false, null, TeacherService::Msg_Exception, $ex->getMessage()];
         }
 
     }
@@ -303,7 +302,7 @@ class UserService
             }
             return [true, $res, '', ''];
         } catch (\Exception $ex) {
-            return [false, null, AdminService::Msg_Exception, $ex->getMessage()];
+            return [false, null, TeacherService::Msg_Exception, $ex->getMessage()];
         }
     }
 
@@ -345,7 +344,7 @@ class UserService
             return [true, $data, '', ''];
 
         } catch (\Exception $ex) {
-            return [false, null, AdminService::Msg_Exception, $ex->getMessage()];
+            return [false, null, TeacherService::Msg_Exception, $ex->getMessage()];
         }
     }
 
@@ -430,7 +429,7 @@ class UserService
             JWTAuth::setToken($token)->invalidate();
             return returnSuccess("Logged out successfully");
         } catch (\Exception $ex) {
-            return returnError(AdminService::Msg_Exception, $ex->getMessage(), $ex->getCode());
+            return returnError(TeacherService::Msg_Exception, $ex->getMessage(), $ex->getCode());
         }
     }
 
@@ -455,7 +454,7 @@ class UserService
 
             return returnSuccess('Code Resent');
         } catch (\Exception $ex) {
-            return returnError(AdminService::Msg_Exception, $ex->getMessage());
+            return returnError(TeacherService::Msg_Exception, $ex->getMessage());
         }
     }
 
@@ -477,7 +476,7 @@ class UserService
             }
 
         } catch (\Exception $ex) {
-            return returnError(AdminService::Msg_Exception, $ex->getMessage(), 555);
+            return returnError(TeacherService::Msg_Exception, $ex->getMessage(), 555);
         }
     }
 
@@ -501,7 +500,7 @@ class UserService
             return returnSuccess("Deleted");
 
         } catch (\Exception $ex) {
-            return returnError(AdminService::Msg_Exception, $ex->getMessage(), $ex->getCode());
+            return returnError(TeacherService::Msg_Exception, $ex->getMessage(), $ex->getCode());
         }
     }
 
@@ -530,7 +529,7 @@ class UserService
             ]);
             return [true, $res, '', ''];
         } catch (\Exception $ex){
-            return [false, null, AdminService::Msg_Exception, $ex->getMessage()];
+            return [false, null, TeacherService::Msg_Exception, $ex->getMessage()];
         }
     }
 
@@ -554,7 +553,7 @@ class UserService
             $location->save();
             return returnSuccess("A new location has been added");
         }catch (\Exception $ex){
-            return returnError(AdminService::Msg_Exception , $ex->getMessage() , $ex->getCode());
+            return returnError(TeacherService::Msg_Exception , $ex->getMessage() , $ex->getCode());
         }
     }
 
@@ -584,7 +583,7 @@ class UserService
 
             return returnSuccess("This location has been updated");
         }catch (\Exception $ex){
-            return returnError(AdminService::Msg_Exception , $ex->getMessage() , $ex->getCode());
+            return returnError(TeacherService::Msg_Exception , $ex->getMessage() , $ex->getCode());
         }
     }
 
@@ -604,7 +603,7 @@ class UserService
             return returnSuccess("Deleted");
 
         }catch (\Exception $ex){
-            return returnError(AdminService::Msg_Exception , $ex->getMessage() , $ex->getCode());
+            return returnError(TeacherService::Msg_Exception , $ex->getMessage() , $ex->getCode());
         }
     }
 
@@ -621,7 +620,7 @@ class UserService
             $user->save();
             return returnSuccess('Firebase token changed');
         } catch (\Exception $ex){
-            return returnError(AdminService::Msg_Exception , $ex->getMessage() , $ex->getCode());
+            return returnError(TeacherService::Msg_Exception , $ex->getMessage() , $ex->getCode());
         }
     }
 
@@ -638,7 +637,7 @@ class UserService
             $user->save();
             return returnSuccess('User language changed');
         } catch (\Exception $ex){
-            return returnError(AdminService::Msg_Exception , $ex->getMessage() , $ex->getCode());
+            return returnError(TeacherService::Msg_Exception , $ex->getMessage() , $ex->getCode());
         }
 
 

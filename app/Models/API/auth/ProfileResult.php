@@ -22,10 +22,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ProfileResult extends Model
 {
-    protected $fillable = [
-        'id' , 'first_name' , 'last_name' ,
-        'phone' , 'image'
-    ];
+    protected $fillable=['id','city','region','password',
+        'email','image','name','phone'];
+
 
     /**
      * @OA\Property(
@@ -38,15 +37,6 @@ class ProfileResult extends Model
     public $id;
 
 
-    /**
-     * @OA\Property(
-     *     description="First Name",
-     *     title="first_name",
-     * )
-     *
-     * @var string
-     */
-    public $first_name;
 
     /**
      * @OA\Property(
@@ -56,7 +46,7 @@ class ProfileResult extends Model
      *
      * @var string
      */
-    public $last_name;
+    public $name;
 
     /**
      * @OA\Property(
@@ -68,6 +58,45 @@ class ProfileResult extends Model
      */
     public $phone;
 
+    /**
+     * @OA\Property(
+     *     description="email",
+     *     title="email",
+     * )
+     *
+     * @var string
+     */
+    public $email;
+
+    /**
+     * @OA\Property(
+     *     description="region",
+     *     title="region",
+     * )
+     *
+     * @var string
+     */
+    public $region;
+
+    /**
+     * @OA\Property(
+     *     description="city",
+     *     title="city",
+     * )
+     *
+     * @var string
+     */
+    public $city;
+
+    /**
+     * @OA\Property(
+     *     description="password",
+     *     title="password",
+     * )
+     *
+     * @var string
+     */
+    public $password;
 
     /**
      * @OA\Property(
@@ -79,26 +108,6 @@ class ProfileResult extends Model
      */
     public $image;
 
-    /**
-     * @OA\Property(
-     *     description="Number of delivery oberation",
-     *     title="number_of_delivery_oberation",
-     * )
-     *
-     * @var integer
-     */
-    public $NumberOfDeliveryOperation;
-
-    /**
-     * @OA\Property(
-     *     description="Locations",
-     *     title="locations",
-     *     @OA\Items(ref="#/components/schemas/Location")
-     * )
-     *
-     * @var array
-     */
-    public $locations;
 
 }
 

@@ -6,31 +6,39 @@ use App\enums\ActiveInactiveStatus;
 use App\enums\ErrorCode;
 use App\enums\RequestStatus;
 use App\Models\API\lists\CarTypeResult;
+use App\Models\API\lists\CourseTypeResult;
 use App\Models\API\lists\OrderStatusListModel;
 use App\Models\API\lists\OrderStatusListResult;
 use App\Models\API\other\ApiMessage;
 use App\Models\CarType;
+use App\Models\Course;
+use App\Models\CourseType;
+use Illuminate\Support\Facades\DB;
 
 
 class ListsService {
 
 
-    public static function CarTypeList($request) {
+    public static function CourseTypeList($request) {
+
         try {
-            $query = CarType::where(['status' => ActiveInactiveStatus::active]);
+            $page_size = $request->pagesize ? $request->pagesize : 10;
+            $query = DB::table('courses_types')
+                ->where('status', ActiveInactiveStatus::active)->latest();
 
-            if ($request->car_type_id) {
-                $query = $query->where(['id' => $request->car_type_id]);
+            if ($request->search) {
+                $query = $query
+                    ->where('name', 'LIKE', "%{$request->search}%");
             }
-
-
             $data = [];
-            foreach ($query->get() as $one) {
-                $item = FillApiModelService::FillCarTypeApiModel($one);
+            foreach ($query->paginate($page_size) as $one) {
+                $item = FillApiModelService::FillListCoursesTypeApiModel($one);
                 $data[] = $item;
             }
 
-            $res = new CarTypeResult([
+
+            $res = new CourseTypeResult([
+                'items_count'=>CourseType::count(),
                 'result' => $data,
                 'isOk' => true,
                 'message' => new ApiMessage([
@@ -42,27 +50,39 @@ class ListsService {
 
             return [true , $res , '' , ''];
         } catch (\Exception $ex){
-            return [false , null , AdminService::Msg_Exception , $ex->getMessage()];
+            return [false , null , TeacherService::Msg_Exception , $ex->getMessage()];
         }
+
 
     }
 
 
-    public static function OrderStatusList(){
+    public static function TeachersList($request) {
+
 
         try {
+            $page_size = $request->pagesize ? $request->pagesize : 10;
+            $query = DB::table('admins')
+                ->where('user_type','teacher')->latest();
+
+            if ($request->search) {
+                $query = $query
+                    ->where('name', 'LIKE', "%{$request->search}%");
+            }
             $data = [];
+            foreach ($query->paginate($page_size) as $one) {
+                $course=Course::where('user_id',$one->id)->get();
+                if($course->count() >=2)
+                {
+                    $item = FillApiModelService::FillListTeacherApiModel($one);
+                    $data[] = $item;
+                }
 
-            $data[] = FillApiModelService::FillOrderStatusApiModel(
-                RequestStatus::new_request, RequestStatus::LabelOf(RequestStatus::new_request));
-            $data[] = FillApiModelService::FillOrderStatusApiModel(
-                RequestStatus::reserved, RequestStatus::LabelOf(RequestStatus::reserved));
-            $data[] = FillApiModelService::FillOrderStatusApiModel(
-                RequestStatus::on_way, RequestStatus::LabelOf(RequestStatus::on_way));
-            $data[] = FillApiModelService::FillOrderStatusApiModel(
-                RequestStatus::delivered, RequestStatus::LabelOf(RequestStatus::delivered));
+            }
 
-            $res = new OrderStatusListResult([
+
+            $res = new CourseTypeResult([
+                'items_count'=>$query->count(),
                 'result' => $data,
                 'isOk' => true,
                 'message' => new ApiMessage([
@@ -74,9 +94,9 @@ class ListsService {
 
             return [true , $res , '' , ''];
         } catch (\Exception $ex){
-            return [false , null , AdminService::Msg_Exception , $ex->getMessage()];
+            return [false , null , TeacherService::Msg_Exception , $ex->getMessage()];
         }
+
+
     }
-
-
 }

@@ -59,7 +59,12 @@ function api_error_msg($message, $code , $type , $ex) {
 function user() {
     return Auth::guard('user-api')->user();
 }
-
+function student() {
+    return Auth::guard('user-api')->user()->user_type;
+}
+function teacher() {
+    return Auth::guard('user-api')->user()->user_type;
+}
 function admin() {
     return Auth::guard('admin-api')->user();
 }
@@ -81,5 +86,6 @@ function uploadImage1($folder,$image){
 
 function getImage($image)
 {
-    return URL::to('/') . 'assets/images/courses/' . $image;
+    return URL::to('/') . '/storage/' . $image;
 }
+

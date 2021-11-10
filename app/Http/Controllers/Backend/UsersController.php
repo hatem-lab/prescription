@@ -21,7 +21,7 @@ class UsersController extends Controller {
     * @return string
     */
     public function index() {
-         $users = Admin::latest()->get(); //use pagination here
+         $users = Admin::latest()->get(); 
         
         return view('dashboard.users.index', compact('users'));
     }
@@ -32,7 +32,7 @@ class UsersController extends Controller {
     }
 
 
-    public function store(Request $request) {
+    public function store(AdminRequest $request) {
         $user = new Admin();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -40,7 +40,7 @@ class UsersController extends Controller {
         $user->city = $request->city;
         $user->phone = $request->phone;
         $user->user_type = $request->user_type;
-        $user->password = bcrypt($request->password);   // the best place on model
+        $user->password = bcrypt($request->password);   
         
         // save the new user data
         if($user->save())
@@ -65,7 +65,7 @@ class UsersController extends Controller {
         $user->city = $request->city ? $request->city :$user->city;
         $user->phone = $request->phone ? $request->phone :$user->phone;
         $user->user_type = $request->user_type ? $request->user_type :$user->user_type;
-        $user->password = bcrypt($request->password);   // the best place on model
+        $user->password = bcrypt($request->password);   
        
 
         // save the new user data
@@ -74,5 +74,18 @@ class UsersController extends Controller {
         else
             return redirect()->route('admin.users.index')->with(['success' => 'حدث خطا ما']);
 
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $user = Admin::find($id);
+            if (!$user)
+                return redirect()->route('admin.users.index')->with(['error' => 'هذا المستخدم غير موجود ']);
+            $user->delete();
+            return redirect()->route('admin.users.index')->with(['success' => 'تم  الحذف بنجاح']);
+        } catch (\Exception $ex) {
+            return redirect()->route('admin.users.index')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+        }
     }
 }

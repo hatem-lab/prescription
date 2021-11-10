@@ -23,13 +23,24 @@ class LoginPayload extends Model
 {
     /**
      * @OA\Property(
-     *     description="Phone number",
-     *     title="phone",
+     *     description="email",
+     *     title="email",
      * )
      *
      * @var string
      */
-    public $phone;
+    public $email;
+
+
+    /**
+     * @OA\Property(
+     *     description="password",
+     *     title="password",
+     * )
+     *
+     * @var string
+     */
+    public $password;
 
 }
 

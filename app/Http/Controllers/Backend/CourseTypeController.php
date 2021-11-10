@@ -23,12 +23,9 @@ class CourseTypeController extends Controller
         return view('dashboard.courses.create');
     }
 
-
     public function store(Request $request)
     {
         DB::beginTransaction();
-        //validation
-
         if (!$request->has('status'))
             $request->request->add(['status' => 0]);
         else
@@ -41,11 +38,8 @@ class CourseTypeController extends Controller
         return redirect()->route('admin.courses')->with(['success' => 'تم ألاضافة بنجاح']);
     }
 
-
     public function edit($id)
     {
-
-        //get specific categories and its translations
         $course = CourseType::find($id);
        
         if (!$course)
@@ -54,22 +48,15 @@ class CourseTypeController extends Controller
         return view('dashboard.courses.edit', compact('course'));
 
     }
-
-
     public function update($id, Request $request)
-    {
-       
+    {  
         try {
-            //validation
 
             //update DB
             $course = CourseType::find($id);
             if (!$course)
                 return redirect()->route('admin.courses')->with(['error' => 'هذا الماركة غير موجود']);
-
             DB::beginTransaction();
-            
-
             if (!$request->has('status'))
                 $request->request->add(['status' => 0]);
             else
@@ -77,9 +64,7 @@ class CourseTypeController extends Controller
 
             $course->update($request->except('_token', 'id'));
 
-            //save translations
-            $course->type = $request->type;
-            $course->save();
+            
 
             DB::commit();
             return redirect()->route('admin.courses')->with(['success' => 'تم ألتحديث بنجاح']);
@@ -96,11 +81,10 @@ class CourseTypeController extends Controller
     public function destroy($id)
     {
         try {
-            //get specific categories and its translations
             $course = CourseType::find($id);
 
             if (!$course)
-                return redirect()->route('admin.courses')->with(['error' => 'هذا الماركة غير موجود ']);
+                return redirect()->route('admin.courses')->with(['error' => 'هذا الكورس غير موجود ']);
 
             $course->delete();
 

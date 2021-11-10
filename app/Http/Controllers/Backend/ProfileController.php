@@ -18,11 +18,10 @@ class ProfileController extends Controller
 
     }
 
-    public function updateProfile(ProfileRequest $request)
+    public function updateProfile(Request $request)
     {
         //validate
         // db
-
         try {
 
             $admin = Admin::find(auth('admin')->user()->id);

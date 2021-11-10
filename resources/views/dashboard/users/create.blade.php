@@ -132,7 +132,7 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> {Lang::get('all.region',[],getCurrentLang())}}
+                                                            <label for="projectinput1"> {{Lang::get('all.region',[],getCurrentLang())}}
                                                             </label>
                                                             <input type="text" id="password"
                                                                    class="form-control"
