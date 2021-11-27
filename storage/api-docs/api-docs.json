@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Start Laravel",
+        "title": "Prescription",
         "version": "1.0.0"
     },
     "servers": [
@@ -10,491 +10,18 @@
             "description": "main server"
         },
         {
-            "url": "/laravel/backend/public/api",
+            "url": "/pres/backend/public/api",
             "description": "local server"
         }
     ],
     "paths": {
-        "/student/register": {
-            "post": {
-                "tags": [
-                    "Auth Student"
-                ],
-                "summary": "Register as a new Student",
-                "operationId": "authRegister",
-                "parameters": [
-                    {
-                        "name": "Language",
-                        "in": "header",
-                        "description": "(en or ar) If left empty it is English",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "description": "Registration model",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/RegisterModel"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "RegisterResult response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiResultRegisterResult"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/student/login": {
-            "post": {
-                "tags": [
-                    "Auth Student"
-                ],
-                "summary": "Login as a Student",
-                "operationId": "authLogin",
-                "parameters": [
-                    {
-                        "name": "Language",
-                        "in": "header",
-                        "description": "(en or ar) If left empty it is English",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "description": "Login model",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/LoginPayload"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "User Profile response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/LoginResultApi"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/student/profile": {
-            "get": {
-                "tags": [
-                    "Auth Student"
-                ],
-                "summary": "Get profile details",
-                "operationId": "a00a5f711ddefd7cc446890f37b96ff6",
-                "parameters": [
-                    {
-                        "name": "Language",
-                        "in": "header",
-                        "description": "(en or ar) If left empty it is English",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ApiResultProfileResult response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiResultProfileAdminResult"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "apiAuth": []
-                    }
-                ]
-            }
-        },
-        "/student/update-profile": {
-            "post": {
-                "tags": [
-                    "Auth Student"
-                ],
-                "summary": "Edit profile content",
-                "operationId": "829e52a3a516a3f1851eb9f5183dae32",
-                "parameters": [
-                    {
-                        "name": "Language",
-                        "in": "header",
-                        "description": "(en or ar) If left empty it is English",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "$ref": "#components/schemas/EditProfileAdminRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "ApiResultProfileResult response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiResult"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "apiAuth": []
-                    }
-                ]
-            }
-        },
-        "/student/logout": {
-            "post": {
-                "tags": [
-                    "Auth Student"
-                ],
-                "summary": "Log out from system",
-                "operationId": "4ba284ddc3094e8b1d11eaf3690528e5",
-                "parameters": [
-                    {
-                        "name": "Language",
-                        "in": "header",
-                        "description": "(en or ar) If left empty it is English",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiResult"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "apiAuth": []
-                    }
-                ]
-            }
-        },
-        "/teacher/register": {
-            "post": {
-                "tags": [
-                    "Auth Teacher"
-                ],
-                "summary": "Register as a new Teacher",
-                "operationId": "authRegister",
-                "parameters": [
-                    {
-                        "name": "Language",
-                        "in": "header",
-                        "description": "(en or ar) If left empty it is English",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "description": "Registration model",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/RegisterModel"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "RegisterResult response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiResultRegisterResult"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/teacher/login": {
-            "post": {
-                "tags": [
-                    "Auth Teacher"
-                ],
-                "summary": "Login as a Teacher",
-                "operationId": "authLogin",
-                "parameters": [
-                    {
-                        "name": "Language",
-                        "in": "header",
-                        "description": "(en or ar) If left empty it is English",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "description": "Login model",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/LoginAdminPayload"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "User Profile response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/LoginAdminResultApi"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/teacher/profile": {
-            "get": {
-                "tags": [
-                    "Auth Teacher"
-                ],
-                "summary": "Get profile details",
-                "operationId": "d7dc5a8b9aeb35aff3f8403c6beaae0f",
-                "parameters": [
-                    {
-                        "name": "Language",
-                        "in": "header",
-                        "description": "(en or ar) If left empty it is English",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ApiResultProfileResult response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiResultProfileAdminResult"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "apiAuth": []
-                    }
-                ]
-            }
-        },
-        "/teacher/update-profile": {
-            "post": {
-                "tags": [
-                    "Auth Teacher"
-                ],
-                "summary": "Edit profile content",
-                "operationId": "4f885d40920c7265438873617df3c36c",
-                "parameters": [
-                    {
-                        "name": "Language",
-                        "in": "header",
-                        "description": "(en or ar) If left empty it is English",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "$ref": "#components/schemas/EditProfileAdminRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "ApiResultProfileResult response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiResult"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "apiAuth": []
-                    }
-                ]
-            }
-        },
-        "/teacher/logout": {
-            "post": {
-                "tags": [
-                    "Auth Teacher"
-                ],
-                "summary": "Log out from system",
-                "operationId": "63f42e5108d3dfb28ab672da0f525fe2",
-                "parameters": [
-                    {
-                        "name": "Language",
-                        "in": "header",
-                        "description": "(en or ar) If left empty it is English",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ApiResult"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "apiAuth": []
-                    }
-                ]
-            }
-        },
-        "/lists/Courses-Type": {
+        "/lists/categories": {
             "get": {
                 "tags": [
                     "Lists"
                 ],
-                "summary": "Courses Type List",
-                "operationId": "49753e0550ec12d4ff7c4f11fed57cb6",
-                "parameters": [
-                    {
-                        "name": "Language",
-                        "in": "header",
-                        "description": "(en or ar) If left empty it is English",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "pagesize",
-                        "in": "query",
-                        "description": "number of retuned values",
-                        "required": false,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    },
-                    {
-                        "name": "page",
-                        "in": "query",
-                        "description": "page number",
-                        "required": false,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    },
-                    {
-                        "name": "search",
-                        "in": "query",
-                        "description": "search by type",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/CourseTypeResult"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/lists/Teachers": {
-            "get": {
-                "tags": [
-                    "Lists"
-                ],
-                "summary": "Teachers List",
-                "operationId": "5ed748e65e71a37574eff82d15e383aa",
+                "summary": "categories List",
+                "operationId": "408a146e9cf92b99a794c6b7756f0d4a",
                 "parameters": [
                     {
                         "name": "Language",
@@ -541,7 +68,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/TeachersResult"
+                                    "$ref": "#/components/schemas/CategoryResult"
                                 }
                             }
                         }
@@ -549,31 +76,60 @@
                 }
             }
         },
-        "/services/course-details": {
+        "/lists/companies": {
             "get": {
                 "tags": [
-                    "services teachers"
+                    "Lists"
                 ],
-                "summary": "course details",
-                "operationId": "b309842ffab553dfc11c5853320f01c9",
+                "summary": "companies List",
+                "operationId": "36ee5319e7b2080a8034e491ab6f7906",
                 "parameters": [
                     {
-                        "name": "id",
-                        "in": "query",
-                        "description": "ID of course",
-                        "required": true,
+                        "name": "Language",
+                        "in": "header",
+                        "description": "(en or ar) If left empty it is English",
+                        "required": false,
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "pagesize",
+                        "in": "query",
+                        "description": "number of retuned values",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "search by name",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "CourseResult response",
+                        "description": "Success response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/CourseResult"
+                                    "$ref": "#/components/schemas/CompanyResult"
                                 }
                             }
                         }
@@ -581,13 +137,306 @@
                 }
             }
         },
-        "/services/all-courses": {
+        "/lists/contraindications": {
             "get": {
                 "tags": [
-                    "services teachers"
+                    "Lists"
                 ],
-                "summary": "all courses",
-                "operationId": "0e36c43cbee7898650761b9737bffb0e",
+                "summary": "contraindications List",
+                "operationId": "6b4c29297c724d6ebe140fdc9849c2d0",
+                "parameters": [
+                    {
+                        "name": "Language",
+                        "in": "header",
+                        "description": "(en or ar) If left empty it is English",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "pagesize",
+                        "in": "query",
+                        "description": "number of retuned values",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "search by name",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ContraindicationsResult"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/lists/shapes": {
+            "get": {
+                "tags": [
+                    "Lists"
+                ],
+                "summary": "shapes List",
+                "operationId": "2a201fa35079c2361378ef1e4176c918",
+                "parameters": [
+                    {
+                        "name": "Language",
+                        "in": "header",
+                        "description": "(en or ar) If left empty it is English",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "pagesize",
+                        "in": "query",
+                        "description": "number of retuned values",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "search by name",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ContraindicationsResult"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/lists/doses": {
+            "get": {
+                "tags": [
+                    "Lists"
+                ],
+                "summary": "doses List",
+                "operationId": "6512836f052a06cb1a5682aa1949a938",
+                "parameters": [
+                    {
+                        "name": "Language",
+                        "in": "header",
+                        "description": "(en or ar) If left empty it is English",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "pagesize",
+                        "in": "query",
+                        "description": "number of retuned values",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "search by name",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ContraindicationsResult"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/lists/medications": {
+            "get": {
+                "tags": [
+                    "Lists"
+                ],
+                "summary": "medications List",
+                "operationId": "dcb37195cfe954a5014f5bd6799e04bc",
+                "parameters": [
+                    {
+                        "name": "Language",
+                        "in": "header",
+                        "description": "(en or ar) If left empty it is English",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "pagesize",
+                        "in": "query",
+                        "description": "number of retuned values",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "medication_name",
+                        "in": "query",
+                        "description": "search by medication name",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "commercial_name",
+                        "in": "query",
+                        "description": "search by commercial name",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "id of category",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "shap_id",
+                        "in": "query",
+                        "description": "id of shap",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "contraindication_id",
+                        "in": "query",
+                        "description": "id of contraindication",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "company_id",
+                        "in": "query",
+                        "description": "id of company",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MedicationResult"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/services/all-prescriptions": {
+            "get": {
+                "tags": [
+                    "Prescriptions"
+                ],
+                "summary": "all prescriptions",
+                "operationId": "e655c07ac19019768d235da0edd2668a",
                 "parameters": [
                     {
                         "name": "Language",
@@ -625,7 +474,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/CourseResult"
+                                    "$ref": "#/components/schemas/PrescriptionResult"
                                 }
                             }
                         }
@@ -633,13 +482,129 @@
                 }
             }
         },
-        "/services/create-course": {
+        "/services/prescriptions-details": {
+            "get": {
+                "tags": [
+                    "Prescriptions"
+                ],
+                "summary": "prescription details",
+                "operationId": "87f2a83a2a71d87c629ef7a45d6b92bf",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "ID of prescription",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "MedicationResult response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PrescriptionResult"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/services/medication-details": {
+            "get": {
+                "tags": [
+                    "Medications"
+                ],
+                "summary": "medication details",
+                "operationId": "e0c3ad0ac2284f946a3f3985c8be55f4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "ID of Medication",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "MedicationResult response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MedicationResult"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/services/all-medications": {
+            "get": {
+                "tags": [
+                    "Medications"
+                ],
+                "summary": "Get All Medications",
+                "operationId": "a42cd8e0f131c8900f3bafcdfcfbe00e",
+                "parameters": [
+                    {
+                        "name": "Language",
+                        "in": "header",
+                        "description": "(en or ar) If left empty it is English",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "pagesize",
+                        "in": "query",
+                        "description": "number of retuned values",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "MedicationResult response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MedicationResult"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/services/create-prescription": {
             "post": {
                 "tags": [
-                    "services teachers"
+                    "Prescriptions"
                 ],
-                "summary": "Create New course",
-                "operationId": "8ca345675d08adb28ac698725c6e7a43",
+                "summary": "Create New Prescription",
+                "operationId": "ba4b005fabe19cd6ab320ce6b6fd89e9",
                 "parameters": [
                     {
                         "name": "Language",
@@ -655,7 +620,7 @@
                     "content": {
                         "multipart/form-data": {
                             "schema": {
-                                "$ref": "#components/schemas/CreateCousePayLoad"
+                                "$ref": "#components/schemas/CreatePrescriptionPayLoad"
                             }
                         }
                     }
@@ -666,7 +631,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/CourseResult"
+                                    "$ref": "#/components/schemas/PrescriptionResult"
                                 }
                             }
                         }
@@ -674,13 +639,13 @@
                 }
             }
         },
-        "/services/update-course": {
+        "/services/update-prescription": {
             "post": {
                 "tags": [
-                    "services teachers"
+                    "Prescriptions"
                 ],
-                "summary": "Create New course",
-                "operationId": "a0d7a771959cb6f6005fda467d1f1154",
+                "summary": "Update Prescription",
+                "operationId": "e2bfd453b7249cfe4ff50d179d888937",
                 "parameters": [
                     {
                         "name": "Language",
@@ -696,7 +661,7 @@
                     "content": {
                         "multipart/form-data": {
                             "schema": {
-                                "$ref": "#components/schemas/UpdateCoursePayLoad"
+                                "$ref": "#components/schemas/UpdatePrescriptionPayLoad"
                             }
                         }
                     }
@@ -707,7 +672,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/CourseResult"
+                                    "$ref": "#/components/schemas/PrescriptionResult"
                                 }
                             }
                         }
@@ -715,13 +680,13 @@
                 }
             }
         },
-        "/services/delete-course": {
+        "/services/delete-prescription": {
             "post": {
                 "tags": [
-                    "services teachers"
+                    "Prescriptions"
                 ],
-                "summary": "delete course",
-                "operationId": "fd9174011da6f3b534f86b3f8e882976",
+                "summary": "delete Prescription",
+                "operationId": "08918ae40953faa0fa2c798ad596853b",
                 "parameters": [
                     {
                         "name": "Language",
@@ -739,7 +704,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/DeleteCoursePayload"
+                                "$ref": "#/components/schemas/DeletePrescriptionPayload"
                             }
                         }
                     }
@@ -757,67 +722,96 @@
                     }
                 }
             }
-        },
-        "/services/courses-student": {
-            "get": {
-                "tags": [
-                    "services Student"
-                ],
-                "summary": "student courses",
-                "operationId": "fa567c340839014e09c46de18585dad9",
-                "parameters": [
-                    {
-                        "name": "Language",
-                        "in": "header",
-                        "description": "(en or ar) If left empty it is English",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "pagesize",
-                        "in": "query",
-                        "description": "number of retuned values",
-                        "required": false,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    },
-                    {
-                        "name": "page",
-                        "in": "query",
-                        "description": "page number",
-                        "required": false,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "RequestResult response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/CourseResult"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "apiAuth": []
-                    }
-                ]
-            }
         }
     },
     "components": {
         "schemas": {
+            "AboutApp": {
+                "title": "AboutApp model",
+                "description": "AboutApp model",
+                "properties": {
+                    "description": {
+                        "title": "description",
+                        "description": "Description",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "AboutAppResult": {
+                "title": "AboutAppResult model",
+                "description": "AboutAppResult model",
+                "properties": {
+                    "result": {
+                        "$ref": "#/components/schemas/AboutApp"
+                    },
+                    "isOk": {
+                        "title": "isOk",
+                        "description": "Indicates if the response is ok or not",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "$ref": "#/components/schemas/ApiMessage"
+                    }
+                },
+                "type": "object"
+            },
+            "ContactUs": {
+                "title": "ContactUs model",
+                "description": "ContactUs model",
+                "properties": {
+                    "location": {
+                        "$ref": "#/components/schemas/LocationAdmin"
+                    },
+                    "phone": {
+                        "title": "phone",
+                        "description": "phone",
+                        "type": "string"
+                    },
+                    "mobile": {
+                        "title": "mobile",
+                        "description": "mobile",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ContactUsResult": {
+                "title": "AboutUsResult model",
+                "description": "AboutUsResult model",
+                "properties": {
+                    "result": {
+                        "$ref": "#/components/schemas/ContactUs"
+                    },
+                    "isOk": {
+                        "title": "isOk",
+                        "description": "Indicates if the response is ok or not",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "$ref": "#/components/schemas/ApiMessage"
+                    }
+                },
+                "type": "object"
+            },
+            "ApiResultProfileResult": {
+                "title": "ApiResultProfileResult model",
+                "description": "ApiResultProfileResult model",
+                "properties": {
+                    "result": {
+                        "$ref": "#/components/schemas/ProfileResult"
+                    },
+                    "isOk": {
+                        "title": "isOk",
+                        "description": "Indicates if the response is ok or not",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "$ref": "#/components/schemas/ApiMessage"
+                    }
+                },
+                "type": "object"
+            },
             "ApiResultRegisterResult": {
                 "title": "ApiResultRegisterResult model",
                 "description": "ApiResultRegisterResult model",
@@ -836,18 +830,359 @@
                 },
                 "type": "object"
             },
-            "LoginPayload": {
-                "title": "LoginPayload model",
-                "description": "LoginPayload model",
+            "ApiResultsendCodeResult": {
+                "title": "ApiResultRegisterResult model",
+                "description": "ApiResultRegisterResult model",
                 "properties": {
-                    "email": {
-                        "title": "email",
-                        "description": "email",
+                    "result": {
+                        "$ref": "#/components/schemas/CodeResult"
+                    },
+                    "isOk": {
+                        "title": "isOk",
+                        "description": "Indicates if the response is ok or not",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "$ref": "#/components/schemas/ApiMessage"
+                    }
+                },
+                "type": "object"
+            },
+            "ChangeEmailKernelModel": {
+                "title": "ChangeEmailKernelModel model",
+                "description": "ChangeEmailKernelModel model",
+                "properties": {
+                    "newEmail": {
+                        "title": "newEmail",
+                        "description": "User new email",
+                        "type": "string"
+                    },
+                    "password": {
+                        "title": "password",
+                        "description": "User password",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ChangePasswordPayload": {
+                "title": "ChangePasswordPayload model",
+                "description": "ChangePasswordPayload model",
+                "properties": {
+                    "oldPassword": {
+                        "title": "oldPassword",
+                        "description": "User old password",
+                        "type": "string"
+                    },
+                    "newPassword": {
+                        "title": "newPassword",
+                        "description": "User new password",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ChangePasswordRequestConfirmed": {
+                "title": "ChangePasswordRequestConfirmed model",
+                "description": "ChangePasswordRequestConfirmed model",
+                "properties": {
+                    "code": {
+                        "title": "code",
+                        "description": "User old password",
+                        "type": "string"
+                    },
+                    "newPassword": {
+                        "title": "newPassword",
+                        "description": "User new password",
+                        "type": "string"
+                    },
+                    "newConfirmPassword": {
+                        "title": "new_confirm_password",
+                        "description": "User new password",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ChangePhoneNumberKernelModel": {
+                "title": "ChangePhoneNumberKernelModel model",
+                "description": "ChangePhoneNumberKernelModel model",
+                "properties": {
+                    "newPhoneNumber": {
+                        "title": "newPhoneNumber",
+                        "description": "User new phone number",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ChangePhoneRequest": {
+                "title": "ChangePhoneRequest model",
+                "description": "ChangePhoneRequest model",
+                "properties": {
+                    "password": {
+                        "title": "password",
+                        "description": "User password",
+                        "type": "string"
+                    },
+                    "new_phone": {
+                        "title": "new_phone",
+                        "description": "User new phone",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "ClientSubscriptionRequest": {
+                "title": "ClientSubscriptionRequest model",
+                "description": "ClientSubscriptionRequest model",
+                "properties": {
+                    "username": {
+                        "title": "username",
+                        "description": "Subscriping client name",
+                        "type": "string"
+                    },
+                    "work_name": {
+                        "title": "work_name",
+                        "description": "Work/job name",
+                        "type": "string"
+                    },
+                    "phone": {
+                        "title": "phone",
+                        "description": "Phone number",
+                        "type": "string"
+                    },
+                    "mobile": {
+                        "title": "mobile",
+                        "description": "Mobile number",
+                        "type": "string"
+                    },
+                    "city": {
+                        "title": "city",
+                        "description": "City name",
+                        "type": "string"
+                    },
+                    "area": {
+                        "title": "area",
+                        "description": "Area name",
+                        "type": "string"
+                    },
+                    "address": {
+                        "title": "address",
+                        "description": "Address",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "CodeResult": {
+                "title": "CodeResult model",
+                "description": "CodeResult model",
+                "properties": {
+                    "code": {
+                        "title": "code",
+                        "description": "code",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "ConfirmAccountModel": {
+                "title": "ConfirmAccountModel model",
+                "description": "ConfirmAccountModel model",
+                "properties": {
+                    "phone": {
+                        "title": "phone",
+                        "description": "The phone of user to verify",
+                        "type": "string"
+                    },
+                    "code": {
+                        "title": "code",
+                        "description": "Verification Code",
                         "type": "string"
                     },
                     "password": {
                         "title": "password",
                         "description": "password",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ConfirmationCodeModel": {
+                "title": "ConfirmationCodeModel model",
+                "description": "ConfirmationCodeModel model",
+                "properties": {
+                    "username": {
+                        "title": "username",
+                        "description": "The username or phone of user to verify",
+                        "type": "string"
+                    },
+                    "code": {
+                        "title": "code",
+                        "description": "Confirmation Code",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "EditProfileRequest": {
+                "title": "EditProfileRequest model",
+                "description": "EditProfileRequest model",
+                "properties": {
+                    "first_name": {
+                        "title": "first_name",
+                        "description": "First Name",
+                        "type": "string"
+                    },
+                    "last_name": {
+                        "title": "last_name",
+                        "description": "Last Name",
+                        "type": "string"
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "email",
+                        "type": "string"
+                    },
+                    "phone": {
+                        "title": "phone",
+                        "description": "phone",
+                        "type": "string"
+                    },
+                    "birthday": {
+                        "title": "birthday",
+                        "description": "birthday",
+                        "type": "string"
+                    },
+                    "image": {
+                        "description": "User image",
+                        "type": "string",
+                        "format": "binary"
+                    }
+                },
+                "type": "object"
+            },
+            "ExternalLoginPayload": {
+                "title": "ExternalLoginPayload model",
+                "description": "ExternalLoginPayload model",
+                "properties": {
+                    "token": {
+                        "title": "token",
+                        "description": "the access token sent from login facebook",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ForgotPasswordApiModel": {
+                "title": "ForgotPasswordApiModel model",
+                "description": "ForgotPasswordApiModel model",
+                "properties": {
+                    "phone": {
+                        "title": "phone",
+                        "description": "phone",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "GoogleRequestLogin": {
+                "title": "GoogleRequestLogin model",
+                "description": "GoogleRequestLogin model",
+                "properties": {
+                    "auth_token": {
+                        "title": "auth_token",
+                        "description": "Facebook auth token",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "LocationModel": {
+                "title": "Location model",
+                "description": "Location model",
+                "properties": {
+                    "address": {
+                        "title": "address",
+                        "description": "Address",
+                        "type": "string"
+                    },
+                    "region_id": {
+                        "title": "region",
+                        "description": "Region",
+                        "type": "integer"
+                    },
+                    "lat": {
+                        "title": "lat",
+                        "description": "Lat",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "lng": {
+                        "title": "lng",
+                        "description": "Lng",
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "type": "object"
+            },
+            "LocationUpdateModel": {
+                "title": "Location Update Model",
+                "description": "Location Update Model",
+                "properties": {
+                    "location_id": {
+                        "title": "location_id",
+                        "description": "Location Id",
+                        "type": "integer"
+                    },
+                    "address": {
+                        "title": "address",
+                        "description": "Address",
+                        "type": "string"
+                    },
+                    "region_id": {
+                        "title": "region",
+                        "description": "Region",
+                        "type": "integer"
+                    },
+                    "lat": {
+                        "title": "lat",
+                        "description": "Lat",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "lng": {
+                        "title": "lng",
+                        "description": "Lng",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "status": {
+                        "title": "status",
+                        "description": "Status: 0 => InActive , 1 => Active",
+                        "type": "integer",
+                        "enum": [
+                            "0",
+                            "1"
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "LoginPayload": {
+                "title": "LoginPayload model",
+                "description": "LoginPayload model",
+                "properties": {
+                    "phone": {
+                        "title": "phone",
+                        "description": "Phone number",
+                        "type": "string"
+                    },
+                    "password": {
+                        "title": "password",
+                        "description": " Password",
                         "type": "string"
                     }
                 },
@@ -859,7 +1194,7 @@
                 "properties": {
                     "resultCode": {
                         "title": "resultCode",
-                        "description": ">-\r\n    Code of resonse (response type)\r\n        1 => Login Accepted\r\n        2 => Invalid Password\r\n        3 => Account not Confirmed\r\n        4 => User is BANNED\r\n        5 => Account not Active\r\n        6 => User not found",
+                        "description": ">-\n    Code of resonse (response type)\n        1 => Login Accepted\n        2 => Invalid Password\n        3 => Account not Confirmed\n        4 => User is BANNED\n        5 => Account not Active\n        6 => User not found",
                         "type": "integer"
                     },
                     "resultText": {
@@ -896,6 +1231,95 @@
                 },
                 "type": "object"
             },
+            "MediaResult": {
+                "title": "MediaModel model",
+                "description": "MediaModel model",
+                "properties": {
+                    "result": {
+                        "title": "result",
+                        "description": "MediaModel Result Model",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/MediaModel"
+                        }
+                    },
+                    "isOk": {
+                        "title": "isOk",
+                        "description": "Indicates if the response is ok or not",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "$ref": "#/components/schemas/ApiMessage"
+                    }
+                },
+                "type": "object"
+            },
+            "NotificationSetting": {
+                "title": "NotificationSetting model",
+                "description": "NotificationSetting model",
+                "properties": {
+                    "allowMessagesNotifications": {
+                        "title": "allowMessagesNotifications",
+                        "type": "boolean"
+                    },
+                    "ticketAnsweredNotification": {
+                        "title": "ticketAnsweredNotification",
+                        "type": "boolean"
+                    },
+                    "newReviewOnMyProduct": {
+                        "title": "newReviewOnMyProduct",
+                        "type": "boolean"
+                    },
+                    "newViewToMyProduct": {
+                        "title": "newViewToMyProduct",
+                        "type": "boolean"
+                    },
+                    "yourProductSavedBySomeone": {
+                        "title": "yourProductSavedBySomeone",
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "PasswordPayload": {
+                "title": "PasswordPayload model",
+                "description": "PasswordPayload model",
+                "properties": {
+                    "password": {
+                        "title": "password",
+                        "description": "Account Password",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "PhoneModel": {
+                "title": "PhoneModel model",
+                "description": "PhoneModel model",
+                "properties": {
+                    "countryCode": {
+                        "title": "countryCode",
+                        "description": "countryCode",
+                        "type": "string"
+                    },
+                    "countryCodeSource": {
+                        "title": "countryCodeSource",
+                        "description": "countryCodeSource",
+                        "type": "string"
+                    },
+                    "nationalNumber": {
+                        "title": "nationalNumber",
+                        "description": "nationalNumber",
+                        "type": "string"
+                    },
+                    "formatedValue": {
+                        "title": "formatedValue",
+                        "description": "formatedValue",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "ProfileResult": {
                 "title": "ProfileResult model",
                 "description": "ProfileResult model",
@@ -905,7 +1329,22 @@
                         "description": "ID",
                         "type": "integer"
                     },
-                    "name": {
+                    "first_name": {
+                        "title": "first_name",
+                        "description": "First Name",
+                        "type": "string"
+                    },
+                    "birthday": {
+                        "title": "birthday",
+                        "description": " birthday",
+                        "type": "string"
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": " email",
+                        "type": "string"
+                    },
+                    "last_name": {
                         "title": "last_name",
                         "description": "Last Name",
                         "type": "string"
@@ -915,30 +1354,99 @@
                         "description": "Phone",
                         "type": "string"
                     },
-                    "email": {
-                        "title": "email",
-                        "description": "email",
-                        "type": "string"
-                    },
                     "region": {
                         "title": "region",
                         "description": "region",
                         "type": "string"
                     },
-                    "city": {
-                        "title": "city",
-                        "description": "city",
-                        "type": "string"
-                    },
-                    "password": {
-                        "title": "password",
-                        "description": "password",
+                    "location": {
+                        "title": "location",
+                        "description": "location",
                         "type": "string"
                     },
                     "image": {
                         "title": "image",
                         "description": "Image Url",
                         "type": "string"
+                    },
+                    "preferred_media_contact": {
+                        "$ref": "#/components/schemas/MediaModel"
+                    }
+                },
+                "type": "object"
+            },
+            "ProfileSummaryApiModel": {
+                "title": "ProfileSummaryApiModel model",
+                "description": "ProfileSummaryApiModel model",
+                "properties": {
+                    "subscribedSubjectsCount": {
+                        "title": "subscribedSubjectsCount",
+                        "description": "Subscribed Subjects count",
+                        "type": "integer"
+                    },
+                    "subscribedPathsCount": {
+                        "title": "subscribedPathsCount",
+                        "description": "Subscribed Paths count",
+                        "type": "integer"
+                    },
+                    "doneSubjectsCount": {
+                        "title": "doneSubjectsCount",
+                        "description": "Done Subjects count",
+                        "type": "integer"
+                    },
+                    "donePathsCount": {
+                        "title": "donePathsCount",
+                        "description": "Done Paths count",
+                        "type": "integer"
+                    },
+                    "doneSubjectsPrecentageToFav": {
+                        "title": "doneSubjectsPrecentageToFav",
+                        "description": "Done Subjects precentage to the ones in favorit",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "donePathsPrecentageToFav": {
+                        "title": "donePathsPrecentageToFav",
+                        "description": "Done Paths precentage to the ones in favorit",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "doneSubjectsSubscribed": {
+                        "title": "doneSubjectsSubscribed",
+                        "description": "Done subjects to subscribed ones precentage",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "doneSubjectsPrecentageToSubscribed": {
+                        "title": "doneSubjectsPrecentageToSubscribed",
+                        "description": "Done subjects to subscribed ones precentage",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "donePathsPrecentageToSubscribed": {
+                        "title": "donePathsPrecentageToSubscribed",
+                        "description": "Done paths to subscribed ones precentage",
+                        "type": "number",
+                        "format": "float"
+                    }
+                },
+                "type": "object"
+            },
+            "ProfileSummeryResult": {
+                "title": "ProfileSummeryResult model",
+                "description": "ProfileSummeryResult model",
+                "properties": {
+                    "result": {
+                        "$ref": "#/components/schemas/ProfileSummaryApiModel"
+                    },
+                    "isOk": {
+                        "title": "isOk",
+                        "description": "Indicates if the response is ok or not",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "title": "message",
+                        "description": "Api message"
                     }
                 },
                 "type": "object"
@@ -947,14 +1455,19 @@
                 "title": "RegisterModel model",
                 "description": "RegisterModel model",
                 "properties": {
-                    "email": {
-                        "title": "email",
-                        "description": "email",
+                    "phone": {
+                        "title": "phone",
+                        "description": "Phone",
                         "type": "string"
                     },
-                    "name": {
-                        "title": "name",
-                        "description": "name",
+                    "firstname": {
+                        "title": "firstname",
+                        "description": "firstname",
+                        "type": "string"
+                    },
+                    "lastname": {
+                        "title": "lastname",
+                        "description": "lastname",
                         "type": "string"
                     },
                     "password": {
@@ -969,19 +1482,177 @@
                 "title": "RegisterResult model",
                 "description": "RegisterResult model",
                 "properties": {
-                    "email": {
-                        "title": "email",
-                        "description": "email",
+                    "phone": {
+                        "title": "phone",
+                        "description": "Phone",
                         "type": "string"
                     },
-                    "name": {
-                        "title": "name",
-                        "description": "name",
+                    "firstname": {
+                        "title": "firstname",
+                        "description": "firstname",
+                        "type": "string"
+                    },
+                    "lastname": {
+                        "title": "lastname",
+                        "description": "lastname",
                         "type": "string"
                     },
                     "message": {
                         "title": "message",
                         "description": "Message",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ResetPasswordApiModel": {
+                "title": "ResetPasswordApiModel model",
+                "description": "ResetPasswordApiModel model",
+                "properties": {
+                    "code": {
+                        "title": "code",
+                        "description": "Confirmation Code",
+                        "type": "string"
+                    },
+                    "phone": {
+                        "title": "phone",
+                        "description": "Phone",
+                        "type": "string"
+                    },
+                    "password": {
+                        "title": "password",
+                        "description": "New Password",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "SetProfileDataRequest": {
+                "title": "SetProfileDataRequest model",
+                "description": "SetProfileDataRequest model",
+                "properties": {
+                    "phone": {
+                        "title": "phone",
+                        "description": "User phone",
+                        "type": "string"
+                    },
+                    "new_password": {
+                        "title": "new_password",
+                        "description": "User new password",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "SummeryApiModel": {
+                "title": "SummeryApiModel model",
+                "description": "SummeryApiModel model",
+                "properties": {
+                    "products_count": {
+                        "title": "products_count",
+                        "description": "products_count",
+                        "type": "integer"
+                    },
+                    "businesses_count": {
+                        "title": "businesses_count",
+                        "description": "businesses_count",
+                        "type": "integer"
+                    },
+                    "categories_count": {
+                        "title": "categories_count",
+                        "description": "categories_count",
+                        "type": "integer"
+                    },
+                    "business_to_products": {
+                        "title": "business_to_products",
+                        "description": "SummeryBusinessProductsCountApiModel Result Model",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/SummeryBusinessProductsCountApiModel"
+                        }
+                    },
+                    "other_products_count": {
+                        "title": "other_products_count",
+                        "description": "other_products_count",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "SummeryBusinessProductsCountApiModel": {
+                "title": "SummeryBusinessProductsCountApiModel model",
+                "description": "SummeryBusinessProductsCountApiModel model",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "name",
+                        "type": "integer"
+                    },
+                    "products_count": {
+                        "title": "products_count",
+                        "description": "products_count",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "SummeryResult": {
+                "title": "SummeryResult model",
+                "description": "SummeryResult model",
+                "properties": {
+                    "result": {
+                        "$ref": "#/components/schemas/SummeryApiModel"
+                    },
+                    "isOk": {
+                        "title": "isOk",
+                        "description": "Indicates if the response is ok or not",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "title": "message",
+                        "description": "Api message"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateContactAdminMedia": {
+                "title": "PhoneModel model",
+                "description": "PhoneModel model",
+                "properties": {
+                    "contact_media_ids": {
+                        "title": "countryCode",
+                        "description": "countryCode"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateContactMedia": {
+                "title": "PhoneModel model",
+                "description": "PhoneModel model",
+                "properties": {
+                    "contact_media_ids": {
+                        "title": "countryCode",
+                        "description": "countryCode",
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateFirebaseApiRequest": {
+                "title": "UpdateFirebaseApiRequest model",
+                "description": "UpdateFirebaseApiRequest model",
+                "properties": {
+                    "newToken": {
+                        "title": "newToken",
+                        "description": "New Token",
                         "type": "string"
                     }
                 },
@@ -1005,18 +1676,80 @@
                 },
                 "type": "object"
             },
+            "CarDetails": {
+                "title": "CarDetails model",
+                "description": "CarDetails model",
+                "properties": {
+                    "carImages": {
+                        "title": "car_images",
+                        "description": "Car Images",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CarImage"
+                        }
+                    },
+                    "carType": {
+                        "$ref": "#/components/schemas/IdValueApiModel"
+                    }
+                },
+                "type": "object"
+            },
+            "CarImage": {
+                "title": "CarImage model",
+                "description": "CarImage model",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "ID",
+                        "type": "integer"
+                    },
+                    "image": {
+                        "title": "type",
+                        "description": "Message type",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ChangePasswordAgentPayload": {
+                "title": "ChangePasswordPayload model",
+                "description": "ChangePasswordPayload model",
+                "properties": {
+                    "oldPassword": {
+                        "title": "oldPassword",
+                        "description": "User old password",
+                        "type": "string"
+                    },
+                    "newPassword": {
+                        "title": "newPassword",
+                        "description": "User new password",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "EditProfileAdminRequest": {
                 "title": "EditProfileAdminRequest model",
                 "description": "EditProfileAdminRequest model",
                 "properties": {
-                    "name": {
+                    "first_name": {
+                        "title": "first_name",
+                        "description": "First Name",
+                        "type": "string"
+                    },
+                    "last_name": {
                         "title": "last_name",
                         "description": "Last Name",
                         "type": "string"
                     },
                     "phone": {
                         "title": "phone",
-                        "description": "Phone",
+                        "description": "phone",
+                        "type": "string"
+                    },
+                    "birthday": {
+                        "title": "birthday",
+                        "description": "birthday",
                         "type": "string"
                     },
                     "email": {
@@ -1024,23 +1757,23 @@
                         "description": "email",
                         "type": "string"
                     },
-                    "password": {
-                        "title": "password",
-                        "description": "password",
-                        "type": "string"
+                    "lat": {
+                        "title": "lat",
+                        "description": "lat",
+                        "type": "integer"
                     },
-                    "region": {
-                        "title": "region",
-                        "description": "region",
-                        "type": "string"
+                    "lng": {
+                        "title": "lng",
+                        "description": "lng",
+                        "type": "integer"
                     },
-                    "city": {
-                        "title": "city",
-                        "description": "city",
-                        "type": "string"
+                    "region_id": {
+                        "title": "region_id",
+                        "description": "region id",
+                        "type": "integer"
                     },
                     "image": {
-                        "description": "User image",
+                        "description": "Agent image",
                         "type": "string",
                         "format": "binary"
                     }
@@ -1056,14 +1789,9 @@
                         "description": "The phone of user to verify",
                         "type": "string"
                     },
-                    "code": {
-                        "title": "code",
-                        "description": "Verification Code",
-                        "type": "string"
-                    },
                     "newPassword": {
-                        "title": "code",
-                        "description": "Verification Code",
+                        "title": "newPassword",
+                        "description": "newPassword",
                         "type": "string"
                     }
                 },
@@ -1073,9 +1801,9 @@
                 "title": "LoginAdminPayload model",
                 "description": "LoginAdminPayload model",
                 "properties": {
-                    "email": {
-                        "title": "email",
-                        "description": "email",
+                    "phone": {
+                        "title": "phone",
+                        "description": "Phone number",
                         "type": "string"
                     },
                     "password": {
@@ -1092,7 +1820,7 @@
                 "properties": {
                     "resultCode": {
                         "title": "resultCode",
-                        "description": ">-\r\n    Code of resonse (response type)\r\n        1 => Login Accepted\r\n        2 => Invalid Password\r\n        3 => Account not Confirmed\r\n        4 => User is BANNED\r\n        5 => Account not Active\r\n        6 => User not found",
+                        "description": ">-\n    Code of resonse (response type)\n        1 => Login Accepted\n        2 => Invalid Password\n        3 => Account not Confirmed\n        4 => User is BANNED\n        5 => Account not Active\n        6 => User not found",
                         "type": "integer"
                     },
                     "resultText": {
@@ -1138,9 +1866,24 @@
                         "description": "ID",
                         "type": "integer"
                     },
-                    "name": {
+                    "first_name": {
+                        "title": "first_name",
+                        "description": "First Name",
+                        "type": "string"
+                    },
+                    "last_name": {
                         "title": "last_name",
                         "description": "Last Name",
+                        "type": "string"
+                    },
+                    "birthday": {
+                        "title": "birthday",
+                        "description": "birthday ",
+                        "type": "string"
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": " email",
                         "type": "string"
                     },
                     "phone": {
@@ -1148,30 +1891,28 @@
                         "description": "Phone",
                         "type": "string"
                     },
-                    "email": {
-                        "title": "email",
-                        "description": "email",
-                        "type": "string"
-                    },
-                    "region": {
-                        "title": "region",
-                        "description": "region",
-                        "type": "string"
-                    },
-                    "city": {
-                        "title": "city",
-                        "description": "city",
-                        "type": "string"
-                    },
-                    "password": {
-                        "title": "password",
-                        "description": "password",
-                        "type": "string"
-                    },
                     "image": {
                         "title": "image",
                         "description": "Image Url",
                         "type": "string"
+                    },
+                    "city": {
+                        "title": "city",
+                        "description": "city"
+                    },
+                    "region": {
+                        "title": "region",
+                        "description": " region"
+                    },
+                    "location": {
+                        "title": "location",
+                        "description": "location",
+                        "type": "string"
+                    },
+                    "isOnline": {
+                        "title": "is_online",
+                        "description": "Is Online",
+                        "type": "integer"
                     }
                 },
                 "type": "object"
@@ -1193,6 +1934,51 @@
                 },
                 "type": "object"
             },
+            "CarTypeModel": {
+                "title": "CategoryModel model",
+                "description": "CategoryModel model",
+                "properties": {
+                    "category_icon": {
+                        "title": "category_icon",
+                        "description": "category_icon",
+                        "type": "string"
+                    },
+                    "category_name": {
+                        "title": "category_name",
+                        "description": "category_name",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "CarTypeResult": {
+                "title": "CarTypeResult model",
+                "description": "CarTypeResult model",
+                "properties": {
+                    "items_count": {
+                        "title": "items_count",
+                        "description": "items_count",
+                        "type": "integer"
+                    },
+                    "result": {
+                        "title": "result",
+                        "description": "RangesPriceModel Result Model",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/RangesPriceModel"
+                        }
+                    },
+                    "isOk": {
+                        "title": "isOk",
+                        "description": "Indicates if the response is ok or not",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "$ref": "#/components/schemas/ApiMessage"
+                    }
+                },
+                "type": "object"
+            },
             "CategoryApiModel": {
                 "title": "CategoryApiModel model",
                 "description": "CategoryApiModel model",
@@ -1207,21 +1993,58 @@
                         "description": "Name",
                         "type": "string"
                     },
-                    "icon": {
-                        "title": "icon",
-                        "description": "Icon",
+                    "sub_categories": {
+                        "$ref": "#/components/schemas/SubCategoriesApiModel"
+                    }
+                },
+                "type": "object"
+            },
+            "CategoryModel": {
+                "title": "PreferenceApiModel model",
+                "description": "PreferenceApiModel model",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "ID",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "Name",
                         "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "CategoryResult": {
+                "title": "CategoryResult model",
+                "description": "CategoryResult model",
+                "properties": {
+                    "items_count": {
+                        "title": "items_count",
+                        "description": "items_count",
+                        "type": "integer"
                     },
-                    "property_details": {
-                        "title": "property_details",
-                        "description": "Property Details"
+                    "result": {
+                        "title": "result",
+                        "description": "CategoryApiModel Result Model",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CategoryApiModel"
+                        }
                     },
-                    "preferences": {
-                        "title": "preferences",
-                        "description": "Preferences"
+                    "isOk": {
+                        "title": "isOk",
+                        "description": "Indicates if the response is ok or not",
+                        "type": "boolean"
                     },
-                    "range_prices": {
-                        "$ref": "#/components/schemas/CategoryApiModel"
+                    "message": {
+                        "$ref": "#/components/schemas/ApiMessage"
+                    },
+                    "pagesCount": {
+                        "title": "pagesCount",
+                        "description": "Pages count of list (by page size)",
+                        "type": "integer"
                     }
                 },
                 "type": "object"
@@ -1231,8 +2054,7 @@
                 "description": "CityApiModel model",
                 "properties": {
                     "regions": {
-                        "title": "regions",
-                        "description": "Regions"
+                        "$ref": "#/components/schemas/RegionApiModel"
                     },
                     "id": {
                         "title": "id",
@@ -1247,34 +2069,31 @@
                 },
                 "type": "object"
             },
-            "CourseTypeModel": {
-                "title": "PreferenceApiModel model",
-                "description": "PreferenceApiModel model",
+            "CityRegionApiModel": {
+                "title": "CityApiModel model",
+                "description": "CityApiModel model",
                 "properties": {
+                    "region": {
+                        "title": "region",
+                        "description": "Region",
+                        "type": "string"
+                    },
                     "id": {
                         "title": "id",
                         "description": "ID",
                         "type": "integer"
                     },
-                    "type": {
-                        "title": "type",
-                        "description": "type",
+                    "name": {
+                        "title": "name",
+                        "description": "Name",
                         "type": "string"
-                    },
-                    "status": {
-                        "title": "status",
-                        "description": "status",
-                        "type": "integer"
-                    },
-                    "courses": {
-                        "$ref": "#/components/schemas/CourseApiModel"
                     }
                 },
                 "type": "object"
             },
-            "CourseTypeResult": {
-                "title": "CourseTypeResult model",
-                "description": "CourseTypeResult model",
+            "CityResult": {
+                "title": "CityResult model",
+                "description": "CityResult model",
                 "properties": {
                     "items_count": {
                         "title": "items_count",
@@ -1283,10 +2102,10 @@
                     },
                     "result": {
                         "title": "result",
-                        "description": "CourseTypeModel Result Model",
+                        "description": "CityApiModel Result Model",
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/CourseTypeModel"
+                            "$ref": "#/components/schemas/CityApiModel"
                         }
                     },
                     "isOk": {
@@ -1305,7 +2124,450 @@
                 },
                 "type": "object"
             },
-            "TeacherModel": {
+            "CladdingApiModel": {
+                "title": "CladdingApiModel model",
+                "description": "CladdingApiModel model",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "ID",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "Name",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "CladdingResult": {
+                "title": "CladdingResult model",
+                "description": "CladdingResult model",
+                "properties": {
+                    "result": {
+                        "title": "result",
+                        "description": "CladdingApiModel Result Model",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CladdingApiModel"
+                        }
+                    },
+                    "isOk": {
+                        "title": "isOk",
+                        "description": "Indicates if the response is ok or not",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "$ref": "#/components/schemas/ApiMessage"
+                    },
+                    "pagesCount": {
+                        "title": "pagesCount",
+                        "description": "Pages count of list (by page size)",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "CompanyApiModel": {
+                "title": "CategoryApiModel model",
+                "description": "CategoryApiModel model",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "ID",
+                        "type": "integer"
+                    },
+                    "company_name": {
+                        "title": "company_name",
+                        "description": "company_name",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "CompanyResult": {
+                "title": "CategoryResult model",
+                "description": "CategoryResult model",
+                "properties": {
+                    "items_count": {
+                        "title": "items_count",
+                        "description": "items_count",
+                        "type": "integer"
+                    },
+                    "result": {
+                        "title": "result",
+                        "description": "CategoryApiModel Result Model",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CompanyApiModel"
+                        }
+                    },
+                    "isOk": {
+                        "title": "isOk",
+                        "description": "Indicates if the response is ok or not",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "$ref": "#/components/schemas/ApiMessage"
+                    },
+                    "pagesCount": {
+                        "title": "pagesCount",
+                        "description": "Pages count of list (by page size)",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "ContactMediaApiModel": {
+                "title": "ContactMediaApiModel model",
+                "description": "ContactMediaApiModel model",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "ID",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "Name",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ContactMediaResult": {
+                "title": "ContactMediaResult model",
+                "description": "ContactMediaResult model",
+                "properties": {
+                    "result": {
+                        "title": "result",
+                        "description": "ContactMediaApiModel Result Model",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ContactMediaApiModel"
+                        }
+                    },
+                    "isOk": {
+                        "title": "isOk",
+                        "description": "Indicates if the response is ok or not",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "$ref": "#/components/schemas/ApiMessage"
+                    },
+                    "pagesCount": {
+                        "title": "pagesCount",
+                        "description": "Pages count of list (by page size)",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "ContraindicationsApiModel": {
+                "title": "ContraindicationsApiModel model",
+                "description": "ContraindicationsApiModel model",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "ID",
+                        "type": "integer"
+                    },
+                    "content": {
+                        "title": "content",
+                        "description": "content",
+                        "type": "string"
+                    },
+                    "title": {
+                        "title": "title",
+                        "description": "title",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ContraindicationsResult": {
+                "title": "CategoryResult model",
+                "description": "CategoryResult model",
+                "properties": {
+                    "items_count": {
+                        "title": "items_count",
+                        "description": "items_count",
+                        "type": "integer"
+                    },
+                    "result": {
+                        "title": "result",
+                        "description": "CategoryApiModel Result Model",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ContraindicationsApiModel"
+                        }
+                    },
+                    "isOk": {
+                        "title": "isOk",
+                        "description": "Indicates if the response is ok or not",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "$ref": "#/components/schemas/ApiMessage"
+                    },
+                    "pagesCount": {
+                        "title": "pagesCount",
+                        "description": "Pages count of list (by page size)",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "DosesApiModel": {
+                "title": "DosesApiModel model",
+                "description": "DosesApiModel model",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "ID",
+                        "type": "integer"
+                    },
+                    "content": {
+                        "title": "content",
+                        "description": "content",
+                        "type": "string"
+                    },
+                    "title": {
+                        "title": "title",
+                        "description": "title",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "FetureModel": {
+                "title": "MediaModel model",
+                "description": "MediaModel model",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "feature name",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "MediaAdminModel": {
+                "title": "MediaAdminModel model",
+                "description": "MediaAdminModel model",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "preferred_contact_media name",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "MediaAdminResult": {
+                "title": "MediaAdminResult model",
+                "description": "MediaAdminResult model",
+                "properties": {
+                    "result": {
+                        "title": "result",
+                        "description": "MediaModel Result Model",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/MediaAdminModel"
+                        }
+                    },
+                    "isOk": {
+                        "title": "isOk",
+                        "description": "Indicates if the response is ok or not",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "$ref": "#/components/schemas/ApiMessage"
+                    }
+                },
+                "type": "object"
+            },
+            "MediaListResult": {
+                "title": "MediaListResult model",
+                "description": "MediaListResult model",
+                "properties": {
+                    "media_contact": {
+                        "title": "result",
+                        "description": "OrderStatusListModel Result Model",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/MediaModel"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "MediaModel": {
+                "title": "MediaModel model",
+                "description": "MediaModel model",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "preferred_contact_media name",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "MedicationApiModel": {
+                "title": "MedicationApiModel model",
+                "description": "MedicationApiModel model",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "ID",
+                        "type": "integer"
+                    },
+                    "pages_count": {
+                        "title": "pages_count",
+                        "description": "pages_count",
+                        "type": "integer"
+                    },
+                    "medication_name": {
+                        "title": "medication_name",
+                        "description": "medication_name",
+                        "type": "string"
+                    },
+                    "commercial_name": {
+                        "title": "commercial_name",
+                        "description": "commercial_name",
+                        "type": "string"
+                    },
+                    "category": {
+                        "$ref": "#/components/schemas/CategoryApiModel"
+                    },
+                    "shap": {
+                        "$ref": "#/components/schemas/ShapesApiModel"
+                    },
+                    "contraindication": {
+                        "$ref": "#/components/schemas/ContraindicationsApiModel"
+                    },
+                    "company": {
+                        "$ref": "#/components/schemas/CompanyApiModel"
+                    },
+                    "dose": {
+                        "$ref": "#/components/schemas/DosesApiModel"
+                    }
+                },
+                "type": "object"
+            },
+            "MedicationModel": {
+                "title": "MedicationModel model",
+                "description": "MedicationModel model",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "ID",
+                        "type": "integer"
+                    },
+                    "medication_name": {
+                        "title": "medication_name",
+                        "description": "medication_name",
+                        "type": "string"
+                    },
+                    "commercial_name": {
+                        "title": "commercial_name",
+                        "description": "commercial_name",
+                        "type": "string"
+                    },
+                    "category": {
+                        "$ref": "#/components/schemas/CategoryApiModel"
+                    },
+                    "shap": {
+                        "$ref": "#/components/schemas/ShapesApiModel"
+                    },
+                    "contraindication": {
+                        "$ref": "#/components/schemas/ContraindicationsApiModel"
+                    },
+                    "company": {
+                        "$ref": "#/components/schemas/CompanyApiModel"
+                    },
+                    "dose": {
+                        "$ref": "#/components/schemas/DosesApiModel"
+                    }
+                },
+                "type": "object"
+            },
+            "MedicationResult": {
+                "title": "MedicationResult model",
+                "description": "MedicationResult model",
+                "properties": {
+                    "items_count": {
+                        "title": "items_count",
+                        "description": "items_count",
+                        "type": "integer"
+                    },
+                    "result": {
+                        "title": "result",
+                        "description": "PropertyApiModel Result Model",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/MedicationApiModel"
+                        }
+                    },
+                    "isOk": {
+                        "title": "isOk",
+                        "description": "Indicates if the response is ok or not",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "$ref": "#/components/schemas/ApiMessage"
+                    },
+                    "pagesCount": {
+                        "title": "pagesCount",
+                        "description": "Pages count of list (by page size)",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "OrderStatusListModel": {
+                "title": "OrderStatusListModel model",
+                "description": "OrderStatusListModel model",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "ID",
+                        "type": "integer"
+                    },
+                    "status": {
+                        "title": "status",
+                        "description": "Order Status",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "OrderStatusListResult": {
+                "title": "OrderStatusListResult model",
+                "description": "OrderStatusListResult model",
+                "properties": {
+                    "result": {
+                        "title": "result",
+                        "description": "OrderStatusListModel Result Model",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/OrderStatusListModel"
+                        }
+                    },
+                    "isOk": {
+                        "title": "isOk",
+                        "description": "Indicates if the response is ok or not",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "$ref": "#/components/schemas/ApiMessage"
+                    }
+                },
+                "type": "object"
+            },
+            "PreferenceApiModel": {
                 "title": "PreferenceApiModel model",
                 "description": "PreferenceApiModel model",
                 "properties": {
@@ -1316,30 +2578,22 @@
                     },
                     "name": {
                         "title": "name",
-                        "description": "name",
+                        "description": "Name",
                         "type": "string"
-                    },
-                    "courses": {
-                        "$ref": "#/components/schemas/CourseApiModel"
                     }
                 },
                 "type": "object"
             },
-            "TeachersResult": {
-                "title": "CourseTypeResult model",
-                "description": "CourseTypeResult model",
+            "PreferenceResult": {
+                "title": "PreferenceResult model",
+                "description": "PreferenceResult model",
                 "properties": {
-                    "items_count": {
-                        "title": "items_count",
-                        "description": "items_count",
-                        "type": "integer"
-                    },
                     "result": {
                         "title": "result",
-                        "description": "TeacherModel Result Model",
+                        "description": "PreferenceApiModel Result Model",
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/TeacherModel"
+                            "$ref": "#/components/schemas/PreferenceApiModel"
                         }
                     },
                     "isOk": {
@@ -1353,6 +2607,523 @@
                     "pagesCount": {
                         "title": "pagesCount",
                         "description": "Pages count of list (by page size)",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "PropertyDetailApiModel": {
+                "title": "PropertyDetailApiModel model",
+                "description": "PropertyDetailApiModel model",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "ID",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "Name",
+                        "type": "string"
+                    },
+                    "min_price": {
+                        "title": "min_price",
+                        "description": "Min Price",
+                        "type": "integer"
+                    },
+                    "max_price": {
+                        "title": "max_price",
+                        "description": "Max Price",
+                        "type": "integer"
+                    },
+                    "bedroom_count": {
+                        "title": "bedroom_count",
+                        "description": "Bedroom Count",
+                        "type": "integer"
+                    },
+                    "bathroom_count": {
+                        "title": "pathroom_count",
+                        "description": "Pathroom Count",
+                        "type": "integer"
+                    },
+                    "min_area_size": {
+                        "title": "min_area_size",
+                        "description": "Min Area Size",
+                        "type": "integer"
+                    },
+                    "max_area_size": {
+                        "title": "max_area_size",
+                        "description": "Max Area Size",
+                        "type": "integer"
+                    },
+                    "floor_number": {
+                        "title": "floor_number",
+                        "description": "Floor Number",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "RangesPriceModel": {
+                "title": "RangesPriceModel model",
+                "description": "RangesPriceModel model",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "ID",
+                        "type": "integer"
+                    },
+                    "cash_category": {
+                        "title": "cash_category",
+                        "description": "cash_category",
+                        "type": "string"
+                    },
+                    "category": {
+                        "$ref": "#/components/schemas/CategoryModel"
+                    },
+                    "max_price": {
+                        "title": "max_price",
+                        "description": "max_price",
+                        "type": "integer"
+                    },
+                    "min_price": {
+                        "title": "min_price",
+                        "description": "min_price",
+                        "type": "integer"
+                    },
+                    "rent_status": {
+                        "title": "rent_status",
+                        "description": "Type of rent_status, 1 => Sell, 2 => Rent",
+                        "type": "string",
+                        "enum": [
+                            "1",
+                            "2"
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "RangesPriceModelResult": {
+                "title": "OfferResult model",
+                "description": "OfferResult model",
+                "properties": {
+                    "result": {
+                        "title": "result",
+                        "description": "RangesPriceModel Result Model",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/RangesPriceModel"
+                        }
+                    },
+                    "isOk": {
+                        "title": "isOk",
+                        "description": "Indicates if the response is ok or not",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "$ref": "#/components/schemas/ApiMessage"
+                    }
+                },
+                "type": "object"
+            },
+            "RangesPricePayload": {
+                "title": "RangesPriceModel model",
+                "description": "RangesPriceModel model",
+                "properties": {
+                    "category_id": {
+                        "title": "category_id",
+                        "description": "category_id",
+                        "type": "integer"
+                    },
+                    "rent_status": {
+                        "title": "rent_status",
+                        "description": "Type of rent_status, 1 => Sell, 2 => Rent",
+                        "type": "string",
+                        "enum": [
+                            "1",
+                            "2"
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "RegionApiModel": {
+                "title": "RegionApiModel model",
+                "description": "RegionApiModel model",
+                "properties": {
+                    "city": {
+                        "$ref": "#/components/schemas/CityApiModel"
+                    },
+                    "id": {
+                        "title": "id",
+                        "description": "ID",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "Name",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "RegionResult": {
+                "title": "RegionResult model",
+                "description": "RegionResult model",
+                "properties": {
+                    "items_count": {
+                        "title": "items_count",
+                        "description": "items_count",
+                        "type": "integer"
+                    },
+                    "result": {
+                        "title": "result",
+                        "description": "RegionApiModel Result Model",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/RegionApiModel"
+                        }
+                    },
+                    "isOk": {
+                        "title": "isOk",
+                        "description": "Indicates if the response is ok or not",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "$ref": "#/components/schemas/ApiMessage"
+                    },
+                    "pagesCount": {
+                        "title": "pagesCount",
+                        "description": "Pages count of list (by page size)",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "ShapesApiModel": {
+                "title": "ShapesApiModel model",
+                "description": "ShapesApiModel model",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "ID",
+                        "type": "integer"
+                    },
+                    "content": {
+                        "title": "content",
+                        "description": "content",
+                        "type": "string"
+                    },
+                    "title": {
+                        "title": "title",
+                        "description": "title",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "SubCategoriesApiModel": {
+                "title": "SubCategoriesApiModel model",
+                "description": "SubCategoriesApiModel model",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "ID",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "Name",
+                        "type": "string"
+                    },
+                    "sub_categories": {
+                        "$ref": "#/components/schemas/SubCategoriesApiModel"
+                    }
+                },
+                "type": "object"
+            },
+            "LocationAdmin": {
+                "title": "LocationAdmin model",
+                "description": "LocationAdmin model",
+                "properties": {
+                    "region": {
+                        "$ref": "#/components/schemas/RegionApiModel"
+                    },
+                    "lat": {
+                        "title": "lat",
+                        "description": "Lat",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "lng": {
+                        "title": "lng",
+                        "description": "Lng",
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "type": "object"
+            },
+            "ActivateNotificationApiRequest": {
+                "title": "ActivateNotificationApiRequest model",
+                "description": "ActivateNotificationApiRequest model",
+                "properties": {
+                    "enable_disable_notification": {
+                        "title": "enable_disable_notification",
+                        "description": "Type of activate_notification, 1 => enable, 2 => disable",
+                        "type": "string",
+                        "enum": [
+                            "1",
+                            "2"
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "ListNotifications": {
+                "title": "ListNotifications model",
+                "description": "ListNotifications model",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "notification Id",
+                        "type": "string"
+                    },
+                    "image": {
+                        "title": "image",
+                        "description": "Notification user image",
+                        "type": "string"
+                    },
+                    "title": {
+                        "title": "title",
+                        "description": "Notification title",
+                        "type": "string"
+                    },
+                    "body": {
+                        "title": "body",
+                        "description": "Notification body",
+                        "type": "string"
+                    },
+                    "data": {
+                        "title": "data",
+                        "description": "Data depends on the notification type",
+                        "type": "object"
+                    },
+                    "is_read": {
+                        "title": "data",
+                        "description": "Data depends on the notification type",
+                        "type": "boolean"
+                    },
+                    "date": {
+                        "title": "data",
+                        "description": "Data depends on the notification type",
+                        "type": "string"
+                    },
+                    "type": {
+                        "title": "type",
+                        "description": "type of notification",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "ListNotificationsResult": {
+                "title": "ListNotificationsResult model",
+                "description": "ListNotificationsResult model",
+                "properties": {
+                    "items_count": {
+                        "title": "items_count",
+                        "description": "items_count",
+                        "type": "integer"
+                    },
+                    "result": {
+                        "title": "result",
+                        "description": "ListNotifications Result Model",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ListNotifications"
+                        }
+                    },
+                    "isOk": {
+                        "title": "isOk",
+                        "description": "Indicates if the response is ok or not",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "$ref": "#/components/schemas/ApiMessage"
+                    }
+                },
+                "type": "object"
+            },
+            "NotificationData": {
+                "title": "NotificationData model",
+                "description": "NotificationData model",
+                "properties": {
+                    "url": {
+                        "title": "URL",
+                        "description": "Notification URL",
+                        "type": "string"
+                    },
+                    "icon": {
+                        "title": "icon",
+                        "description": "Notification Icon",
+                        "type": "string"
+                    },
+                    "is_read": {
+                        "title": "state",
+                        "description": "the state of the notification read or not",
+                        "type": "boolean"
+                    },
+                    "date": {
+                        "title": "date",
+                        "description": "Date",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "NotificationSettings": {
+                "title": "NotificationSettings model",
+                "description": "NotificationSettings model",
+                "properties": {
+                    "type": {
+                        "title": "type of the notification",
+                        "description": "Type of the Notitication",
+                        "type": "integer"
+                    },
+                    "active": {
+                        "title": "active or not",
+                        "description": "the status of the notitifcation if it's active or not.",
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "NotificationSettingsRequest": {
+                "title": "NotificationSettingsRequest model",
+                "description": "NotificationSettingsRequest model",
+                "properties": {
+                    "notificationTypes": {
+                        "title": "result",
+                        "description": "NotificationSettings Result Model",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/NotificationSettings"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "OfferCreateModelApi": {
+                "title": "OfferCreateModelApi model",
+                "description": "OfferCreateModelApi model",
+                "properties": {
+                    "description": {
+                        "title": "description",
+                        "description": "Description",
+                        "type": "string"
+                    },
+                    "whatsapp": {
+                        "title": "whatsapp",
+                        "description": "Whatsapp",
+                        "type": "string"
+                    },
+                    "phone": {
+                        "title": "phone",
+                        "description": "Phone",
+                        "type": "string"
+                    },
+                    "image[]": {
+                        "description": "Item image",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    },
+                    "video[]": {
+                        "description": "Item video",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "OfferModel": {
+                "title": "OfferModel model",
+                "description": "OfferModel model",
+                "properties": {
+                    "offer_id": {
+                        "title": "offer_id",
+                        "description": "Offer_id",
+                        "type": "string"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Description",
+                        "type": "string"
+                    },
+                    "whatsapp": {
+                        "title": "whatsapp",
+                        "description": "Whatsapp",
+                        "type": "string"
+                    },
+                    "phone": {
+                        "title": "phone",
+                        "description": "Phone",
+                        "type": "string"
+                    },
+                    "image[]": {
+                        "description": "Item image",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    },
+                    "video[]": {
+                        "description": "Item video",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "OfferViewPayload": {
+                "title": "OfferViewPayload model",
+                "description": "OfferViewPayload model",
+                "properties": {
+                    "property_id": {
+                        "title": "property_id",
+                        "description": "property_id",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "View_Offer": {
+                "title": "OfferModel model",
+                "description": "OfferModel model",
+                "properties": {
+                    "property_id": {
+                        "title": "property_id",
+                        "description": "property_id",
+                        "type": "integer"
+                    },
+                    "user_id": {
+                        "title": "user_id",
+                        "description": "user_id",
+                        "type": "integer"
+                    },
+                    "views_count": {
+                        "title": "views_count",
+                        "description": "views_count",
                         "type": "integer"
                     }
                 },
@@ -1510,26 +3281,104 @@
                 },
                 "type": "object"
             },
-            "ApiImages": {
-                "title": "ApiImages model",
-                "description": "ApiImages model",
+            "CreatePrescriptionPayLoad": {
+                "title": "CreatePrescriptionPayLoad model",
+                "description": "CreatePrescriptionPayLoad model",
                 "properties": {
-                    "id": {
-                        "title": "id",
-                        "description": "id of image",
+                    "costomer_id": {
+                        "title": "costomer_id",
+                        "description": "costomer_id",
                         "type": "integer"
                     },
-                    "file": {
-                        "title": "file",
-                        "description": "file",
+                    "doctor_id": {
+                        "title": "doctor_id",
+                        "description": "doctor_id",
+                        "type": "integer"
+                    },
+                    "medications_ids": {
+                        "title": "medications_ids",
+                        "description": "medications_ids",
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    },
+                    "precription_quantity": {
+                        "title": "precription_quantity",
+                        "description": "precription_quantity",
+                        "type": "integer"
+                    },
+                    "instruction_to_customer": {
+                        "title": "instruction_to_customer",
+                        "description": "instruction_to_customer",
                         "type": "string"
+                    },
+                    "date_prescription": {
+                        "title": "date_prescription",
+                        "description": "date_prescription",
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "date_prescription_renewal": {
+                        "title": "date_prescription_renewal",
+                        "description": "date_prescription_renewal",
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "date_prescription_send_to_doctor": {
+                        "title": "date_prescription_send_to_doctor",
+                        "description": "date_prescription_send_to_doctor",
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "date_prescription_processed": {
+                        "title": "date_prescription_processed",
+                        "description": "date_prescription_processed",
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "date_prescription_from_doctor": {
+                        "title": "date_prescription_processed",
+                        "description": "date_prescription_processed",
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "date_prescription_recived_from_doctor": {
+                        "title": "date_prescription_recived_from_doctor",
+                        "description": "date_prescription_recived_from_doctor",
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "date_prescription_sent_to_comany": {
+                        "title": "date_prescription_sent_to_comany",
+                        "description": "date_prescription_sent_to_comany",
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "date_prescription_filled": {
+                        "title": "date_prescription_filled",
+                        "description": "date_prescription_filled",
+                        "type": "string",
+                        "format": "datetime"
                     }
                 },
                 "type": "object"
             },
-            "CourseApiModel": {
-                "title": "CourseApiModel model",
-                "description": "CourseApiModel model",
+            "DeletePrescriptionPayload": {
+                "title": "DeletePrescriptionPayload model",
+                "description": "DeletePrescriptionPayload model",
+                "properties": {
+                    "prescription_id": {
+                        "title": "prescription_id",
+                        "description": "Id of prescription",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "PrescriptionApiModel": {
+                "title": "PrescriptionApiModel model",
+                "description": "PrescriptionApiModel model",
                 "properties": {
                     "id": {
                         "title": "id",
@@ -1541,110 +3390,76 @@
                         "description": "pages_count",
                         "type": "integer"
                     },
-                    "title": {
-                        "title": "title",
-                        "description": "title",
+                    "costomer": {
+                        "title": "costomer_id",
+                        "description": "costomer_id",
+                        "type": "integer"
+                    },
+                    "doctor": {
+                        "title": "doctor_id",
+                        "description": "doctor_id",
+                        "type": "integer"
+                    },
+                    "medications": {
+                        "$ref": "#/components/schemas/MedicationModel"
+                    },
+                    "precription_quantity": {
+                        "title": "precription_quantity",
+                        "description": "precription_quantity",
+                        "type": "integer"
+                    },
+                    "instruction_to_customer": {
+                        "title": "instruction_to_customer",
+                        "description": "instruction_to_customer",
                         "type": "string"
                     },
-                    "content": {
-                        "title": "content",
-                        "description": "content",
-                        "type": "string"
+                    "date_prescription": {
+                        "title": "date_prescription",
+                        "description": "date_prescription",
+                        "type": "string",
+                        "format": "datetime"
                     },
-                    "coures_type": {
-                        "title": "coures_type",
-                        "description": "coures_type"
+                    "date_prescription_renewal": {
+                        "title": "date_prescription_renewal",
+                        "description": "date_prescription_renewal",
+                        "type": "string",
+                        "format": "datetime"
                     },
-                    "user": {
-                        "$ref": "#/components/schemas/ProfileResult"
+                    "date_prescription_send_to_doctor": {
+                        "title": "date_prescription_send_to_doctor",
+                        "description": "date_prescription_send_to_doctor",
+                        "type": "string",
+                        "format": "datetime"
                     },
-                    "media": {
-                        "$ref": "#/components/schemas/ApiImages"
+                    "date_prescription_processed": {
+                        "title": "date_prescription_processed",
+                        "description": "date_prescription_processed",
+                        "type": "string",
+                        "format": "datetime"
                     },
-                    "view_count": {
-                        "title": "view_count",
-                        "description": "view_count",
-                        "type": "integer"
-                    }
-                },
-                "type": "object"
-            },
-            "CourseResult": {
-                "title": "CourseResult model",
-                "description": "CourseResult model",
-                "properties": {
-                    "items_count": {
-                        "title": "items_count",
-                        "description": "items_count",
-                        "type": "integer"
+                    "date_prescription_from_doctor": {
+                        "title": "date_prescription_processed",
+                        "description": "date_prescription_processed",
+                        "type": "string",
+                        "format": "datetime"
                     },
-                    "result": {
-                        "title": "result",
-                        "description": "CourseApiModel Result Model",
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/CourseApiModel"
-                        }
+                    "date_prescription_recived_from_doctor": {
+                        "title": "date_prescription_recived_from_doctor",
+                        "description": "date_prescription_recived_from_doctor",
+                        "type": "string",
+                        "format": "datetime"
                     },
-                    "isOk": {
-                        "title": "isOk",
-                        "description": "Indicates if the response is ok or not",
-                        "type": "boolean"
+                    "date_prescription_sent_to_comany": {
+                        "title": "date_prescription_sent_to_comany",
+                        "description": "date_prescription_sent_to_comany",
+                        "type": "string",
+                        "format": "datetime"
                     },
-                    "message": {
-                        "$ref": "#/components/schemas/ApiMessage"
-                    },
-                    "pagesCount": {
-                        "title": "pagesCount",
-                        "description": "Pages count of list (by page size)",
-                        "type": "integer"
-                    }
-                },
-                "type": "object"
-            },
-            "CreateCousePayLoad": {
-                "title": "CreatePrescriptionPayLoad model",
-                "description": "CreatePrescriptionPayLoad model",
-                "properties": {
-                    "title": {
-                        "title": "title",
-                        "description": "title",
-                        "type": "string"
-                    },
-                    "content": {
-                        "title": "content",
-                        "description": "content",
-                        "type": "string"
-                    },
-                    "type_id": {
-                        "title": "type_id",
-                        "description": "type_id",
-                        "type": "integer"
-                    },
-                    "user_id": {
-                        "title": "user_id",
-                        "description": "user_id",
-                        "type": "integer"
-                    },
-                    "media[]": {
-                        "description": "Item media",
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "binary"
-                        }
-                    }
-                },
-                "type": "object"
-            },
-            "DeleteCoursePayload": {
-                "title": "DeleteCoursePayload model",
-                "description": "DeleteCoursePayload model",
-                "properties": {
-                    "course_id": {
-                        "title": "course_id",
-                        "description": "Id of course",
-                        "type": "integer"
+                    "date_prescription_filled": {
+                        "title": "date_prescription_filled",
+                        "description": "date_prescription_filled",
+                        "type": "string",
+                        "format": "datetime"
                     }
                 },
                 "type": "object"
@@ -1742,42 +3557,123 @@
                 },
                 "type": "object"
             },
-            "UpdateCoursePayLoad": {
-                "title": "CreatePrescriptionPayLoad model",
-                "description": "CreatePrescriptionPayLoad model",
+            "PrescriptionResult": {
+                "title": "PrescriptionResult model",
+                "description": "PrescriptionResult model",
                 "properties": {
-                    "course_id": {
-                        "title": "course_id",
-                        "description": "course_id",
+                    "items_count": {
+                        "title": "items_count",
+                        "description": "items_count",
                         "type": "integer"
                     },
-                    "title": {
-                        "title": "title",
-                        "description": "title",
-                        "type": "string"
-                    },
-                    "content": {
-                        "title": "content",
-                        "description": "content",
-                        "type": "string"
-                    },
-                    "type_id": {
-                        "title": "type_id",
-                        "description": "type_id",
-                        "type": "integer"
-                    },
-                    "user_id": {
-                        "title": "user_id",
-                        "description": "user_id",
-                        "type": "integer"
-                    },
-                    "media[]": {
-                        "description": "Item media",
+                    "result": {
+                        "title": "result",
+                        "description": "PrescriptionApiModel Result Model",
                         "type": "array",
                         "items": {
-                            "type": "string",
-                            "format": "binary"
+                            "$ref": "#/components/schemas/PrescriptionApiModel"
                         }
+                    },
+                    "isOk": {
+                        "title": "isOk",
+                        "description": "Indicates if the response is ok or not",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "$ref": "#/components/schemas/ApiMessage"
+                    },
+                    "pagesCount": {
+                        "title": "pagesCount",
+                        "description": "Pages count of list (by page size)",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdatePrescriptionPayLoad": {
+                "title": "UpdatePrescriptionPayLoad model",
+                "description": "UpdatePrescriptionPayLoad model",
+                "properties": {
+                    "prescription_id": {
+                        "title": "prescription_id",
+                        "description": "prescription_id",
+                        "type": "integer"
+                    },
+                    "costomer_id": {
+                        "title": "costomer_id",
+                        "description": "costomer_id",
+                        "type": "integer"
+                    },
+                    "doctor_id": {
+                        "title": "doctor_id",
+                        "description": "doctor_id",
+                        "type": "integer"
+                    },
+                    "medications_ids": {
+                        "title": "medications_ids",
+                        "description": "medications_ids",
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    },
+                    "precription_quantity": {
+                        "title": "precription_quantity",
+                        "description": "precription_quantity",
+                        "type": "integer"
+                    },
+                    "instruction_to_customer": {
+                        "title": "instruction_to_customer",
+                        "description": "instruction_to_customer",
+                        "type": "string"
+                    },
+                    "date_prescription": {
+                        "title": "date_prescription",
+                        "description": "date_prescription",
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "date_prescription_renewal": {
+                        "title": "date_prescription_renewal",
+                        "description": "date_prescription_renewal",
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "date_prescription_send_to_doctor": {
+                        "title": "date_prescription_send_to_doctor",
+                        "description": "date_prescription_send_to_doctor",
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "date_prescription_processed": {
+                        "title": "date_prescription_processed",
+                        "description": "date_prescription_processed",
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "date_prescription_from_doctor": {
+                        "title": "date_prescription_processed",
+                        "description": "date_prescription_processed",
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "date_prescription_recived_from_doctor": {
+                        "title": "date_prescription_recived_from_doctor",
+                        "description": "date_prescription_recived_from_doctor",
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "date_prescription_sent_to_comany": {
+                        "title": "date_prescription_sent_to_comany",
+                        "description": "date_prescription_sent_to_comany",
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "date_prescription_filled": {
+                        "title": "date_prescription_filled",
+                        "description": "date_prescription_filled",
+                        "type": "string",
+                        "format": "datetime"
                     }
                 },
                 "type": "object"

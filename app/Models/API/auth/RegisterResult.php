@@ -21,28 +21,36 @@ use Illuminate\Database\Eloquent\Model;
 class RegisterResult extends Model
 {
 
-    protected $fillable = ['email','name', 'message'];
+    protected $fillable = ['phone','firstname','lastname', 'message'];
 
     /**
      * @OA\Property(
-     *     description="email",
-     *     title="email",
+     *     description="Phone",
+     *     title="phone",
      * )
      *
      * @var string
      */
-    public $email;
+    public $phone;
 
     /**
      * @OA\Property(
-     *     description="name",
-     *     title="name",
+     *     description="firstname",
+     *     title="firstname",
      * )
      *
      * @var string
      */
-    public $name;
-
+    public $firstname;
+    /**
+     * @OA\Property(
+     *     description="lastname",
+     *     title="lastname",
+     * )
+     *
+     * @var string
+     */
+    public $lastname;
 
     /**
      *

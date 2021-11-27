@@ -81,7 +81,7 @@ INSERT INTO `coures_student` (`id`, `course_id`, `student_id`, `created_at`, `up
 -- --------------------------------------------------------
 
 --
--- Table structure for table `courses`
+-- Table structure for table `categories`
 --
 
 CREATE TABLE `courses` (
@@ -98,15 +98,15 @@ CREATE TABLE `courses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `courses`
+-- Dumping data for table `categories`
 --
 
 INSERT INTO `courses` (`id`, `title`, `content`, `photo`, `created_at`, `updated_at`, `is_published`, `type_id`, `user_id`, `views_count`) VALUES
-(2, 'lecture', 'This is a large class held in a lecture hall, a theater-like room that may seat hundreds of students. The professor talks for the entire class while students take notes. Lecture classes are common in first-year courses. Students in these classes may also attend a related discussion class.', NULL, '2021-11-09 16:24:44', '2021-11-09 16:24:44', 1, 1, 20, 3),
+(2, 'lecture', 'This is a large class held in a lecture hall, a theater-like room that may seat hundreds of students. The professor talks for the entire class while students take notes. Lecture classes are common in first-year categories. Students in these classes may also attend a related discussion class.', NULL, '2021-11-09 16:24:44', '2021-11-09 16:24:44', 1, 1, 20, 3),
 (3, 'Discussion', 'Discussion classes (sometimes called sections) are often a required part of lecture classes. Discussions are usually smaller groups of students led by a graduate student. You’ll do additional work, talk about the lecture and have a chance to ask questions.', 'C:\\xampp\\tmp\\php2B4B.tmp', '2021-11-09 16:25:04', '2021-11-09 17:33:19', 1, 1, 20, 3),
-(4, 'seminars', 'In seminars, professors meet with a small group of students. These are often advanced courses that focus on special topics within the student’s major. Seminars are more personal, and students participate more in presentations and discussions. Some seminars focus on career or research skills.', NULL, '2021-11-09 16:25:22', '2021-11-10 18:23:40', 1, 2, 22, 2),
+(4, 'seminars', 'In seminars, professors meet with a small group of students. These are often advanced categories that focus on special topics within the student’s major. Seminars are more personal, and students participate more in presentations and discussions. Some seminars focus on career or research skills.', NULL, '2021-11-09 16:25:22', '2021-11-10 18:23:40', 1, 2, 22, 2),
 (5, 'studio', 'Students who take hands-on classes such as art, theater, music, design or photography will find themselves in a class environment in which they do what they are studying. A drawing class, for example, may be divided into two parts: a lesson class and a drawing studio.', NULL, '2021-11-09 16:26:06', '2021-11-09 16:26:06', 1, 2, 22, 5),
-(6, 'independent-study', 'For an independent-study class, a student and a professor design a study program for the student that is separate from regular courses. Independent study often requires a research project or a lot of reading on a central theme as well as a series of papers or one major paper.', NULL, '2021-11-09 16:26:23', '2021-11-09 16:26:23', 1, 2, 24, 5),
+(6, 'independent-study', 'For an independent-study class, a student and a professor design a study program for the student that is separate from regular categories. Independent study often requires a research project or a lot of reading on a central theme as well as a series of papers or one major paper.', NULL, '2021-11-09 16:26:23', '2021-11-09 16:26:23', 1, 2, 24, 5),
 (20, 'any', 'any', NULL, '2021-11-10 14:36:35', '2021-11-10 14:36:35', 2, 1, 24, 7);
 
 -- --------------------------------------------------------
@@ -271,7 +271,7 @@ ALTER TABLE `coures_student`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `courses`
+-- Indexes for table `categories`
 --
 ALTER TABLE `courses`
   ADD PRIMARY KEY (`id`);
@@ -336,7 +336,7 @@ ALTER TABLE `coures_student`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `courses`
+-- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `courses`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;

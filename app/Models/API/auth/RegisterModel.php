@@ -22,24 +22,32 @@ class RegisterModel extends Model
 {
     /**
      * @OA\Property(
-     *     description="email",
-     *     title="email",
+     *     description="Phone",
+     *     title="phone",
      * )
      *
      * @var string
      */
-    public $email;
+    public $phone;
 
     /**
      * @OA\Property(
-     *     description="name",
-     *     title="name",
+     *     description="firstname",
+     *     title="firstname",
      * )
      *
      * @var string
      */
-    public $name;
-
+    public $firstname;
+    /**
+     * @OA\Property(
+     *     description="lastname",
+     *     title="lastname",
+     * )
+     *
+     * @var string
+     */
+    public $lastname;
     /**
      * @OA\Property(
      *     description="password",

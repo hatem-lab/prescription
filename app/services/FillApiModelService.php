@@ -103,7 +103,7 @@ class FillApiModelService
             'id' => $item->id,
             'type' => $item->type,
             'status' => getActive($item->status),
-            //'courses'=>self::FillApiModel($item),
+            //'categories'=>self::FillApiModel($item),
         ]);
         return $model;
     }
@@ -116,7 +116,7 @@ class FillApiModelService
         $model = new TeacherModel([
             'id' => $item->id,
             'name' => $item->name,
-            'courses' =>  $course ? self::FillApiModel($course) : '',
+            'categories' =>  $course ? self::FillApiModel($course) : '',
 
         ]);
         return $model;

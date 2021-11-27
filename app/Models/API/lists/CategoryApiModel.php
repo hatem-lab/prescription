@@ -24,7 +24,7 @@ class CategoryApiModel extends Model
 {
 
     protected $fillable = [
-        'id' , 'name', 'icon', 'property_details', 'preferences','range_prices'
+        'id' , 'name','sub_categories'
     ];
 
     /**
@@ -47,15 +47,6 @@ class CategoryApiModel extends Model
      */
     public $name;
 
-    /**
-     * @OA\Property(
-     *     description="Icon",
-     *     title="icon",
-     * )
-     *
-     * @var string
-     */
-    public $icon;
 
 
     /**
@@ -64,30 +55,12 @@ class CategoryApiModel extends Model
      *     title="property_details",
      * )
      *
-     * @var PropertyDetailApiModel
+     * @var SubCategoriesApiModel
      */
-    public $property_details;
+    public $sub_categories;
 
 
-    /**
-     * @OA\Property(
-     *     description="Preferences",
-     *     title="preferences",
-     * )
-     *
-     * @var PreferenceApiModel
-     */
-    public $preferences;
-    
-    /**
-     * @OA\Property(
-     *     description="ranges_prices",
-     *     title="ranges_prices",
-     * )
-     *
-     * @var CategoryApiModel
-     */
-    public $range_prices;
+
 
 }
 

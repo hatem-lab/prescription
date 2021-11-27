@@ -137,7 +137,7 @@ class PrescriptionRequestApiModel extends Model
      *    type="string"
      * )
      *
-     * @var \DateTime
+     * @var string
      */
 
     public $date_prescription_send_to_doctor;
@@ -150,7 +150,7 @@ class PrescriptionRequestApiModel extends Model
      *    type="string"
      * )
      *
-     * @var \DateTime
+     * @var string
      */
 
     public $date_prescription_processed;
@@ -163,7 +163,7 @@ class PrescriptionRequestApiModel extends Model
      *    type="string"
      * )
      *
-     * @var \DateTime
+     * @var string
      */
 
     public $date_prescription_from_doctor;
@@ -176,7 +176,7 @@ class PrescriptionRequestApiModel extends Model
      *    type="string"
      * )
      *
-     * @var \DateTime
+     * @var string
      */
 
     public $date_prescription_recived_from_doctor;
@@ -189,7 +189,7 @@ class PrescriptionRequestApiModel extends Model
      *    type="string"
      * )
      *
-     * @var \DateTime
+     * @var string
      */
 
     public $date_prescription_sent_to_comany;
@@ -203,7 +203,7 @@ class PrescriptionRequestApiModel extends Model
      *    type="string"
      * )
      *
-     * @var \DateTime
+     * @var string
      */
 
     public $date_prescription_filled;

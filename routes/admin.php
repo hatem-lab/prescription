@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-const PAGINATION_COUNT=10;
+//const PAGINATION_COUNT=10;
 Auth::routes();
 Route::group(['prefix' => LaravelLocalization::setLocale()], function()
     {
@@ -27,13 +27,77 @@ Route::group(['prefix' => 'admin','middleware' => 'auth:admin'], function () {
     Route::put('update', 'ProfileController@updateprofile')->name('update.profile');
     });
 });
-        Route::group(['prefix' => 'courses'], function () {
-            Route::get('/', 'CourseTypeController@index')->name('admin.courses');
-            Route::get('create', 'CourseTypeController@create')->name('admin.courses.create');
-            Route::post('store', 'CourseTypeController@store')->name('admin.courses.store');
-            Route::get('edit/{id}', 'CourseTypeController@edit')->name('admin.courses.edit');
-            Route::post('update/{id}', 'CourseTypeController@update')->name('admin.courses.update');
-            Route::get('delete/{id}', 'CourseTypeController@destroy')->name('admin.courses.delete');
+        Route::group(['prefix' => 'categories'], function () {
+            Route::get('/', 'CategoryController@index')->name('admin.categories');
+            Route::get('create', 'CategoryController@create')->name('admin.categories.create');
+            Route::post('store', 'CategoryController@store')->name('admin.categories.store');
+            Route::get('edit/{id}', 'CategoryController@edit')->name('admin.categories.edit');
+            Route::post('update/{id}', 'CategoryController@update')->name('admin.categories.update');
+            Route::get('delete/{id}', 'CategoryController@destroy')->name('admin.categories.delete');
+            Route::get('show/{id}','CategoryController@show') -> name('admin.categories.show');
+        });
+        Route::group(['prefix' => 'companies'], function () {
+            Route::get('/', 'CompaniesController@index')->name('admin.companies');
+            Route::get('create', 'CompaniesController@create')->name('admin.companies.create');
+            Route::post('store', 'CompaniesController@store')->name('admin.companies.store');
+            Route::get('edit/{id}', 'CompaniesController@edit')->name('admin.companies.edit');
+            Route::post('update/{id}', 'CompaniesController@update')->name('admin.companies.update');
+            Route::get('delete/{id}', 'CompaniesController@destroy')->name('admin.companies.delete');
+            Route::get('show/{id}','CompaniesController@show') -> name('admin.companies.show');
+        });
+        Route::group(['prefix' => 'contraindications'], function () {
+            Route::get('/', 'ContraindicationsController@index')->name('admin.contraindications');
+            Route::get('create', 'ContraindicationsController@create')->name('admin.contraindications.create');
+            Route::post('store', 'ContraindicationsController@store')->name('admin.contraindications.store');
+            Route::get('edit/{id}', 'ContraindicationsController@edit')->name('admin.contraindications.edit');
+            Route::post('update/{id}', 'ContraindicationsController@update')->name('admin.contraindications.update');
+            Route::get('delete/{id}', 'ContraindicationsController@destroy')->name('admin.contraindications.delete');
+            Route::get('show/{id}','ContraindicationsController@show') -> name('admin.contraindications.show');
+        });
+
+        Route::group(['prefix' => 'medications'], function () {
+            Route::get('/', 'MedicationsController@index')->name('admin.medications');
+            Route::get('create', 'MedicationsController@create')->name('admin.medications.create');
+            Route::post('store', 'MedicationsController@store')->name('admin.medications.store');
+            Route::get('edit/{id}', 'MedicationsController@edit')->name('admin.medications.edit');
+            Route::post('update/{id}', 'MedicationsController@update')->name('admin.medications.update');
+            Route::get('delete/{id}', 'MedicationsController@destroy')->name('admin.medications.delete');
+            Route::get('show/{id}','MedicationsController@show') -> name('admin.medications.show');
+
+        });
+        Route::group(['prefix' => 'prescriptions'], function () {
+            Route::get('/', 'PrescriptionsController@index')->name('admin.prescriptions');
+            Route::get('create', 'PrescriptionsController@create')->name('admin.prescriptions.create');
+            Route::post('store', 'PrescriptionsController@store')->name('admin.prescriptions.store');
+            Route::get('edit/{id}', 'PrescriptionsController@edit')->name('admin.prescriptions.edit');
+            Route::post('update/{id}', 'PrescriptionsController@update')->name('admin.prescriptions.update');
+            Route::get('delete/{id}', 'PrescriptionsController@destroy')->name('admin.prescriptions.delete');
+            Route::get("/loadcategories", "PrescriptionsController@loadCategories")->name('admin.prescriptions.loadCategories');
+            Route::get('show/{id}','PrescriptionsController@show') -> name('admin.prescriptions.show');
+
+        });
+
+
+
+        Route::group(['prefix' => 'shapes'], function () {
+            Route::get('/', 'ShapesController@index')->name('admin.shapes');
+            Route::get('create', 'ShapesController@create')->name('admin.shapes.create');
+            Route::post('store', 'ShapesController@store')->name('admin.shapes.store');
+            Route::get('edit/{id}', 'ShapesController@edit')->name('admin.shapes.edit');
+            Route::post('update/{id}', 'ShapesController@update')->name('admin.shapes.update');
+            Route::get('delete/{id}', 'ShapesController@destroy')->name('admin.shapes.delete');
+            Route::get('show/{id}','ShapesController@show') -> name('admin.shapes.show');
+
+        });
+        Route::group(['prefix' => 'doses'], function () {
+            Route::get('/', 'DosesController@index')->name('admin.doses');
+            Route::get('create', 'DosesController@create')->name('admin.doses.create');
+            Route::post('store', 'DosesController@store')->name('admin.doses.store');
+            Route::get('edit/{id}', 'DosesController@edit')->name('admin.doses.edit');
+            Route::post('update/{id}', 'DosesController@update')->name('admin.doses.update');
+            Route::get('delete/{id}', 'DosesController@destroy')->name('admin.doses.delete');
+            Route::get('show/{id}','DosesController@show') -> name('admin.doses.show');
+
         });
 Route::group(['prefix' => 'users'], function () {
     Route::get('/', 'UsersController@index')->name('admin.users.index');

@@ -56,14 +56,14 @@ Route::group(['prefix' => 'lists'] , function () {
         Route::post('create-course', 'ServicesController@create_course');
         Route::post('update-course', 'ServicesController@update_course');
         Route::post('delete-course', 'ServicesController@delete_course');
-        Route::get('all-courses', 'ServicesController@all_courses');
+        Route::get('all-categories', 'ServicesController@all_courses');
         Route::get('course-details', 'ServicesController@course_details');
     });
 
 Route::group(['middleware' => ['auth:user-api']] , function () {
     Route::group(['prefix' => 'services'], function ()
     {
-        Route::get('courses-student', 'ServicesController@courses_student');
+        Route::get('categories-student', 'ServicesController@courses_student');
     });
 });
 
